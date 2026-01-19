@@ -8,8 +8,8 @@ export default function ResolvedJobCards() {
   const router = useRouter();
   const referralJobs = mockJobs.filter(
     (jobs) =>
-      jobs.status === "APPROVED" ||
-      jobs.status === "REJECTED" ||
+      // jobs.status === "APPROVED" ||
+      // jobs.status === "REJECTED" ||
       jobs.status === "RESOLVED"
   );
 

@@ -40,11 +40,7 @@ export default function TabLayout() {
         name="myPage"
         options={{
           title: "Миний",
-          tabBarIcon: ({ color }) => (
-            <FaUser color={color} />
-
-            // <IconSymbol size={28} name="paperplane.fill" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <FaUser color={color} />,
         }}
       />
     </Tabs>

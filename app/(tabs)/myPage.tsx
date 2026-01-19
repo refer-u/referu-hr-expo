@@ -22,14 +22,14 @@ export default function TabThreeScreen() {
       <View
         style={{
           flexDirection: "column",
-          gap: 20,
+          gap: 25,
         }}
       >
         <Pressable style={styles.titleContainer}>
           <Text
             style={{
               fontFamily: Fonts.sans,
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: 600,
             }}
           >
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   tab: {
     flex: 1,
     borderRadius: 10,
-    paddingVertical: 8,
+    paddingVertical: 5,
     alignItems: "center",
   },
   activeTab: {
