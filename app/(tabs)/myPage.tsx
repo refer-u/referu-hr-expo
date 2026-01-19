@@ -14,8 +14,8 @@ export default function TabThreeScreen() {
     <View
       style={{
         backgroundColor: "#ffffff",
-        paddingHorizontal: 40,
-        paddingVertical: 30,
+        paddingHorizontal: 25,
+        paddingVertical: 70,
         height: "100%",
       }}
     >
@@ -29,7 +29,7 @@ export default function TabThreeScreen() {
           <Text
             style={{
               fontFamily: Fonts.sans,
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: 600,
             }}
           >
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   tab: {
     flex: 1,
     borderRadius: 10,
-    paddingVertical: 5,
+    paddingVertical: 10,
     alignItems: "center",
   },
   activeTab: {
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   tabText: {
     color: "black",
     fontWeight: "500",
+    fontSize: 16,
   },
   activeTabText: {
     color: "black",

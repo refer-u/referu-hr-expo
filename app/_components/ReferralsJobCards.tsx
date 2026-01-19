@@ -27,7 +27,13 @@ export default function ReferralsJobCards() {
                 >
                   <Text style={styles.titleText}>{jobs.title}</Text>
                   <View style={styles.countBadge}>
-                    <Text style={{ color: "#193cb8", fontWeight: 500 }}>
+                    <Text
+                      style={{
+                        color: "#193cb8",
+                        fontWeight: 500,
+                        fontSize: 16,
+                      }}
+                    >
                       {jobs.referralCount} санал
                     </Text>
                   </View>
@@ -47,7 +53,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     borderWidth: 1,
     borderRadius: 10,
-    height: "100%",
+    height: 90,
     paddingVertical: 16,
     paddingHorizontal: 24,
     borderColor: "#F2F0EF",
@@ -61,20 +67,22 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   titleText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 600,
     fontFamily: Fonts.sans,
   },
   departmentTitle: {
     color: "#737373",
     marginTop: 12,
+    fontSize: 16,
   },
   countBadge: {
     backgroundColor: "#dbeafe",
     width: 70,
     paddingVertical: 2,
     paddingHorizontal: 8,
-
+    flexDirection: "row",
+    justifyContent: "center",
     borderRadius: 12,
   },
 });
