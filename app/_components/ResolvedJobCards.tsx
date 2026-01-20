@@ -14,7 +14,7 @@ export default function ResolvedJobCards() {
   );
 
   const handleReferrals = () => {
-    router.push("/referrals/Referrals");
+    router.push("/referrals");
   };
 
   return (

@@ -8,15 +8,15 @@ export default function ReferralsJobCards() {
   const router = useRouter();
   const referralJobs = mockJobs.filter((jobs) => jobs.status === "SUBMITTED");
 
-  const handleReferrals = () => {
-    router.push("/referrals/Referrals");
+  const handleReferrals = (jobId: string) => {
+    router.push({ pathname: "/referrals/[jobId]", params: { jobId } });
   };
   return (
     <View>
       <View style={{ flexDirection: "column", gap: 10 }}>
         {referralJobs.map((jobs) => (
           <View key={jobs.id}>
-            <Pressable onPress={handleReferrals}>
+            <Pressable onPress={() => handleReferrals(jobs.id)}>
               <View style={styles.cardContainer}>
                 <View
                   style={{
