@@ -1,22 +1,126 @@
+// import { Fonts } from "@/constants/theme";
+// import { mockJobs } from "@/lib/mockData";
+// import { useRouter } from "expo-router";
+// import React from "react";
+// import { Pressable, StyleSheet, Text, View } from "react-native";
+
+// export default function ReferralsJobCards() {
+//   const router = useRouter();
+//   const referralJobs = mockJobs.filter((jobs) => jobs.status === "SUBMITTED");
+
+//   const handleReferrals = (jobId: string) => {
+//     router.push({ pathname: "/referrals/[jobId]", params: { jobId } });
+//   };
+//   return (
+//     <View>
+//       <View style={{ flexDirection: "column", gap: 10 }}>
+//         {referralJobs.map((jobs) => (
+//           <View key={jobs.id}>
+//             <Pressable onPress={() => handleReferrals(jobs.id)}>
+//               <View style={styles.cardContainer}>
+//                 <View
+//                   style={{
+//                     flexDirection: "row",
+//                     justifyContent: "space-between",
+//                     alignItems: "center",
+//                   }}
+//                 >
+//                   <Text style={styles.titleText}>{jobs.title}</Text>
+//                   <View style={styles.countBadge}>
+//                     <Text
+//                       style={{
+//                         color: "#193cb8",
+//                         fontWeight: 500,
+//                         fontSize: 16,
+//                       }}
+//                     >
+//                       {jobs.referralCount} санал
+//                     </Text>
+//                   </View>
+//                 </View>
+
+//                 <Text style={styles.departmentTitle}>{jobs.department}</Text>
+//               </View>
+//             </Pressable>
+//           </View>
+//         ))}
+//       </View>
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   cardContainer: {
+//     borderWidth: 1,
+//     borderRadius: 10,
+//     height: 90,
+//     paddingVertical: 16,
+//     paddingHorizontal: 24,
+//     borderColor: "#F2F0EF",
+//     backgroundColor: "#fff",
+
+//     shadowColor: "#000",
+//     shadowOffset: { width: 0, height: 2 },
+//     shadowOpacity: 0.1,
+//     shadowRadius: 3,
+
+//     elevation: 3,
+//   },
+//   titleText: {
+//     fontSize: 18,
+//     fontWeight: 600,
+//     fontFamily: Fonts.sans,
+//   },
+//   departmentTitle: {
+//     color: "#737373",
+//     marginTop: 12,
+//     fontSize: 16,
+//   },
+//   countBadge: {
+//     backgroundColor: "#dbeafe",
+//     width: 70,
+//     paddingVertical: 2,
+//     paddingHorizontal: 8,
+//     flexDirection: "row",
+//     justifyContent: "center",
+//     borderRadius: 12,
+//   },
+// });
+
 import { Fonts } from "@/constants/theme";
-import { mockJobs } from "@/lib/mockData";
+import { mockPostedJobs, mockReferrals } from "@/lib/mockData";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function ReferralsJobCards() {
   const router = useRouter();
-  const referralJobs = mockJobs.filter((jobs) => jobs.status === "SUBMITTED");
+
+  // Jobs that have at least one SUBMITTED referral
+  const referralJobs = mockPostedJobs
+    .map((job) => {
+      const submittedReferrals = mockReferrals.filter(
+        (ref) =>
+          ref.postedJobId === job._id && ref.referralStatus === "SUBMITTED",
+      );
+
+      return {
+        ...job,
+        referralCount: submittedReferrals.length,
+      };
+    })
+    .filter((job) => job.referralCount > 0);
 
   const handleReferrals = (jobId: string) => {
     router.push({ pathname: "/referrals/[jobId]", params: { jobId } });
   };
+
   return (
     <View>
       <View style={{ flexDirection: "column", gap: 10 }}>
-        {referralJobs.map((jobs) => (
-          <View key={jobs.id}>
-            <Pressable onPress={() => handleReferrals(jobs.id)}>
+        {referralJobs.map((job) => (
+          <View key={job._id}>
+            <Pressable onPress={() => handleReferrals(job._id)}>
               <View style={styles.cardContainer}>
                 <View
                   style={{
@@ -25,7 +129,7 @@ export default function ReferralsJobCards() {
                     alignItems: "center",
                   }}
                 >
-                  <Text style={styles.titleText}>{jobs.title}</Text>
+                  <Text style={styles.titleText}>{job.jobTitle}</Text>
                   <View style={styles.countBadge}>
                     <Text
                       style={{
@@ -34,12 +138,12 @@ export default function ReferralsJobCards() {
                         fontSize: 16,
                       }}
                     >
-                      {jobs.referralCount} санал
+                      {job.referralCount} санал
                     </Text>
                   </View>
                 </View>
 
-                <Text style={styles.departmentTitle}>{jobs.department}</Text>
+                <Text style={styles.departmentTitle}>{job.jobDepartment}</Text>
               </View>
             </Pressable>
           </View>
