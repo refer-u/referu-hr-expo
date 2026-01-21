@@ -916,6 +916,32 @@ export const mockReferrals: Referral[] = [
   },
   {
     _id: "ref2",
+    postedJobId: "job2",
+    referringEmployeeId: "emp2",
+    relationWithCandidate: "FRIEND",
+    referralReason: "Backend талдаа маш сайн",
+
+    candidateFirstName: "bla",
+    candidateLastName: "bla",
+    candidateTelNumber: "9999-3333",
+    candidateEmail: "dorj.tsetseg@email.com",
+    candidateLinkedinUrl: "linkedin.com/in/dorj-tsetseg",
+
+    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
+    candidateFieldOfInterest: "Backend Development",
+    candidateResume: "/cv/dorj.pdf",
+
+    hasCandidateConsent: true,
+    isNotCurrentEmployee: true,
+
+    referralStatus: "SUBMITTED",
+    referralStatusUpdatedAt: "2026-01-12",
+
+    createdAt: "2026-01-12",
+    updatedAt: "2026-01-12",
+  },
+  {
+    _id: "ref3",
     postedJobId: "job3",
     referringEmployeeId: "emp3",
     relationWithCandidate: "FORMER_COLLEAGUE",
