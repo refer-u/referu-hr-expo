@@ -1,55 +1,13 @@
-// import { mockReferrals } from "@/lib/mockData";
-// import { useLocalSearchParams, useRouter } from "expo-router";
-// import React from "react";
-// import { Pressable, Text, View } from "react-native";
-
-// const index = () => {
-//   const router = useRouter();
-
-//   const { jobId } = useLocalSearchParams<{ jobId: string }>();
-//   console.log({ jobId });
-
-//   const filteredReferrals = mockReferrals.filter(
-//     (referrals) => referrals.jobId.toString() === jobId
-//   );
-
-//   console.log({ filteredReferrals });
-
-//   const handleReferralDetail = (referralId: string) => {
-//     router.push({
-//       pathname: "/referralDetail/[referralId]",
-//       params: { referralId },
-//     });
-//     console.log({ referralId });
-//   };
-
-//   return (
-//     <View style={{ flexDirection: "column" }}>
-//       <Text>
-//         {filteredReferrals.map((referral) => (
-//           <View key={referral.id}>
-//             <Pressable onPress={() => handleReferralDetail(referral.id)}>
-//               <Text>{referral.candidateName}</Text>
-//             </Pressable>
-
-//             <Pressable>
-//               <Text>{referral.status}</Text>
-//             </Pressable>
-//           </View>
-//         ))}
-//       </Text>
-//     </View>
-//   );
-// };
-
-// export default index;
-
 import { Fonts } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme.web";
-import { mockReferrals } from "@/lib/mockData";
+import {
+  mockReferrals,
+  ReferralStatusColors,
+  ReferralStatusLabels,
+} from "@/lib/mockData";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 const Index = () => {
   const router = useRouter();
@@ -57,14 +15,8 @@ const Index = () => {
   const scheme = useColorScheme();
 
   const filteredReferrals = mockReferrals.filter(
-    (referral) => referral.postedJobId === jobId
+    (referral) => referral.postedJobId === jobId,
   );
-
-  // const referral = mockReferrals.find((ref) => ref._id === referralId);
-
-  //   const employee = mockEmployees.find(
-  //     (emp) => emp._id === referral.referringEmployeeId
-  //   );
 
   const handleReferralDetail = (referralId: string) => {
     router.push({
@@ -81,56 +33,68 @@ const Index = () => {
         padding: 28,
       }}
     >
-      <View style={{ flexDirection: "column", gap: 16 }}>
-        {filteredReferrals.map((referral) => (
-          <View key={referral._id}>
-            <Pressable onPress={() => handleReferralDetail(referral._id)}>
-              <View style={styles.cardContainer}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <View style={{ flexDirection: "column", gap: 3 }}>
-                    <Text style={styles.titleText}>
-                      {referral.candidateFirstName} {referral.candidateLastName}
-                    </Text>
-                    <Text style={{ color: "gray", fontSize: 12 }}>
-                      Санал болгосон
-                    </Text>
-                  </View>
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+        <View style={{ flexDirection: "column", gap: 16 }}>
+          {filteredReferrals.map((referral) => (
+            <View key={referral._id}>
+              <Pressable onPress={() => handleReferralDetail(referral._id)}>
+                <View style={styles.cardContainer}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <View style={{ flexDirection: "column", gap: 3 }}>
+                      <Text style={styles.titleText}>
+                        {referral.candidateFirstName}{" "}
+                        {referral.candidateLastName}
+                      </Text>
+                      <Text style={{ color: "gray", fontSize: 12 }}>
+                        Санал болгосон
+                      </Text>
+                    </View>
 
-                  <View style={styles.countBadge}>
-                    <Text
-                      style={{
-                        color: "#193cb8",
-                        fontWeight: 500,
-                        fontSize: 12,
-                      }}
+                    <View
+                      style={[
+                        styles.countBadge,
+                        {
+                          backgroundColor:
+                            ReferralStatusColors[referral.referralStatus] +
+                            "20",
+                        },
+                      ]}
                     >
-                      {referral.referralStatus}
-                    </Text>
+                      <Text
+                        style={{
+                          color: ReferralStatusColors[referral.referralStatus],
+                          fontWeight: 600,
+                          fontSize: 12,
+                        }}
+                      >
+                        {ReferralStatusLabels[referral.referralStatus]}
+                      </Text>
+                    </View>
                   </View>
-                </View>
-                <View
-                  style={{
-                    width: "100%",
-                    borderColor: "#e7e5e5ff",
-                    opacity: 5,
-                    borderWidth: 0.5,
-                  }}
-                />
+                  <View
+                    style={{
+                      width: "100%",
+                      borderColor: "#e7e5e5ff",
+                      opacity: 5,
+                      borderWidth: 0.5,
+                    }}
+                  />
 
-                <Text style={styles.departmentTitle}>
-                  Огноо: {referral.createdAt}
-                </Text>
-              </View>
-            </Pressable>
-          </View>
-        ))}
-      </View>
+                  <Text style={styles.departmentTitle}>
+                    Огноо: {referral.createdAt}
+                  </Text>
+                </View>
+              </Pressable>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };

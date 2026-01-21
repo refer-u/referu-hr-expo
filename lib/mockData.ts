@@ -1,623 +1,3 @@
-// // lib/types.ts
-
-// export type Status = "SUBMITTED" | "APPROVED" | "REJECTED" | "RESOLVED";
-
-// export type Job = {
-//   id: string;
-//   title: string;
-//   department: string;
-//   postedDate: string;
-//   salaryRange: string;
-//   referralCount?: number;
-//   status: Status;
-// };
-
-// export type Referral = {
-//   id: string;
-//   jobId: string;
-//   employeeName: string;
-//   employeeJobTitle: string;
-//   employeeDepartment: string;
-//   submittedDate: string;
-//   candidateName: string;
-//   status: Status;
-// };
-
-// export type ReferralDetail = {
-//   id: string;
-
-//   employeeName: string;
-//   employeePhone: string;
-//   employeeEmail: string;
-//   employeeDepartment: string;
-//   employeeJobLevel: string;
-//   employeeJobType: string;
-//   relationshipWithCandidate: string;
-//   referralReason: string;
-//   consentReceived: boolean;
-//   currentlyWorking: boolean;
-
-//   candidateName: string;
-//   candidatePhone: string;
-//   candidateEmail: string;
-//   candidateLinkedIn?: string;
-//   candidateCurrentEmployment: string;
-//   candidateInterestedField?: string;
-//   cvUrl?: string;
-
-//   submittedDate: string;
-//   status: Status;
-// };
-
-// // Status helpers
-// export const statusColors: Record<Status, string> = {
-//   SUBMITTED: "blue",
-//   APPROVED: "green",
-//   REJECTED: "red",
-//   RESOLVED: "gray",
-// };
-
-// export const statusLabels: Record<Status, string> = {
-//   SUBMITTED: "Шинэ",
-//   APPROVED: "Зөвшөөрсөн",
-//   REJECTED: "Татгалзсан",
-//   RESOLVED: "Шийдэгдсэн",
-// };
-
-// // ================= MOCK JOBS =================
-// export const mockJobs: Job[] = [
-//   {
-//     id: "1",
-//     title: "Senior Software Engineer",
-//     department: "Технологийн хэлтэс",
-//     postedDate: "2026-01-01",
-//     salaryRange: "₮3,000,000 - ₮5,000,000",
-//     referralCount: 3,
-//     status: "SUBMITTED",
-//   },
-//   {
-//     id: "2",
-//     title: "Product Manager",
-//     department: "Бүтээгдэхүүний хэлтэс",
-//     postedDate: "2026-01-02",
-//     salaryRange: "₮3,500,000 - ₮5,500,000",
-//     referralCount: 1,
-
-//     status: "SUBMITTED",
-//   },
-//   {
-//     id: "3",
-//     title: "UX Designer",
-//     department: "Дизайны алба",
-//     postedDate: "2026-01-05",
-//     salaryRange: "₮2,500,000 - ₮4,000,000",
-//     status: "RESOLVED",
-//   },
-//   {
-//     id: "4",
-//     title: "Data Analyst",
-//     department: "Өгөгдлийн алба",
-//     postedDate: "2026-01-03",
-//     salaryRange: "₮3,000,000 - ₮4,500,000",
-//     status: "RESOLVED",
-//   },
-// ];
-
-// // ================= MOCK REFERRALS =================
-// export const mockReferrals: Referral[] = [
-//   {
-//     id: "1",
-//     jobId: "1",
-//     employeeName: "Болд Бат",
-//     employeeJobTitle: "Software Engineer",
-//     employeeDepartment: "Технологийн хэлтэс",
-//     submittedDate: "2026-01-12",
-//     candidateName: "Дорж Цэцэг",
-//     status: "SUBMITTED",
-//   },
-//   {
-//     id: "2",
-//     jobId: "1",
-//     employeeName: "Сүх Сарнай",
-//     employeeJobTitle: "Senior Engineer",
-//     employeeDepartment: "Технологийн хэлтэс",
-//     submittedDate: "2026-01-11",
-//     candidateName: "Ганбат Мөнх",
-//     status: "SUBMITTED",
-//   },
-//   {
-//     id: "3",
-//     jobId: "1",
-//     employeeName: "Алтан Өнөө",
-//     employeeJobTitle: "Lead Engineer",
-//     employeeDepartment: "Технологийн хэлтэс",
-//     submittedDate: "2026-01-10",
-//     candidateName: "Баяр Төмөр",
-//     status: "SUBMITTED",
-//   },
-//   {
-//     id: "4",
-//     jobId: "2",
-//     employeeName: "Энхтөр Бат",
-//     employeeJobTitle: "Product Manager",
-//     employeeDepartment: "Бүтээгдэхүүний хэлтэс",
-//     submittedDate: "2026-01-09",
-//     candidateName: "Саруул Номин",
-//     status: "SUBMITTED",
-//   },
-//   {
-//     id: "301",
-//     jobId: "3",
-//     employeeName: "Бат-Эрдэнэ Номин",
-//     employeeJobTitle: "UX Designer",
-//     employeeDepartment: "Дизайны алба",
-//     submittedDate: "2026-01-06",
-//     candidateName: "Энхжин Саруул",
-//     status: "APPROVED",
-//   },
-//   {
-//     id: "302",
-//     jobId: "3",
-//     employeeName: "Халиун Ариун",
-//     employeeJobTitle: "UI Designer",
-//     employeeDepartment: "Дизайны алба",
-//     submittedDate: "2026-01-05",
-//     candidateName: "Мөнх-Оргил Туяа",
-//     status: "REJECTED",
-//   },
-//   {
-//     id: "303",
-//     jobId: "3",
-//     employeeName: "Солонго Нарангэрэл",
-//     employeeJobTitle: "Product Designer",
-//     employeeDepartment: "Дизайны алба",
-//     submittedDate: "2026-01-04",
-//     candidateName: "Баярмаа Сондор",
-//     status: "REJECTED",
-//   },
-//   {
-//     id: "304",
-//     jobId: "4",
-//     employeeName: "Тэмүүлэн Ариун",
-//     employeeJobTitle: "Data Analyst",
-//     employeeDepartment: "Өгөгдлийн алба",
-//     submittedDate: "2026-01-04",
-//     candidateName: "Мөнхтөр Гэрэл",
-//     status: "APPROVED",
-//   },
-//   {
-//     id: "305",
-//     jobId: "4",
-//     employeeName: "Сод-Эрдэнэ Халиун",
-//     employeeJobTitle: "Senior Data Analyst",
-//     employeeDepartment: "Өгөгдлийн алба",
-//     submittedDate: "2026-01-03",
-//     candidateName: "Билгүүн Анужин",
-//     status: "REJECTED",
-//   },
-//   {
-//     id: "306",
-//     jobId: "4",
-//     employeeName: "Ганзориг Ням",
-//     employeeJobTitle: "BI Analyst",
-//     employeeDepartment: "Өгөгдлийн алба",
-//     submittedDate: "2026-01-02",
-//     candidateName: "Эрдэнэбаяр Хос",
-//     status: "REJECTED",
-//   },
-// ];
-
-// // ================= MOCK REFERRAL DETAILS =================
-// export const mockReferralDetails: ReferralDetail[] = [
-//   {
-//     id: "1",
-//     employeeName: "Болд Бат",
-//     employeePhone: "9999-1111",
-//     employeeEmail: "bold.bat@company.mn",
-//     employeeDepartment: "Технологийн хэлтэс",
-//     employeeJobLevel: "Senior",
-//     employeeJobType: "Бүтэн цагийн",
-//     relationshipWithCandidate: "Их сургуулийн найз",
-//     referralReason: "Маш сайн програмист, backend талдаа туршлагатай",
-//     consentReceived: true,
-//     currentlyWorking: true,
-
-//     candidateName: "Дорж Цэцэг",
-//     candidatePhone: "9999-2222",
-//     candidateEmail: "dorj.tsetseg@email.com",
-//     candidateLinkedIn: "linkedin.com/in/dorj-tsetseg",
-//     candidateCurrentEmployment: "ABC Tech – Software Developer",
-//     candidateInterestedField: "Backend Development",
-//     cvUrl: "/cv/dorj-tsetseg.pdf",
-
-//     submittedDate: "2026-01-12",
-//     status: "SUBMITTED",
-//   },
-//   {
-//     id: "301",
-//     employeeName: "Бат-Эрдэнэ Номин",
-//     employeePhone: "9999-9001",
-//     employeeEmail: "nomiin.bat@company.mn",
-//     employeeDepartment: "Дизайны алба",
-//     employeeJobLevel: "Senior",
-//     employeeJobType: "Бүтэн цагийн",
-//     relationshipWithCandidate: "Хамт ажиллаж байсан",
-//     referralReason: "UX судалгаа, хэрэглэгчийн урсгал маш сайн",
-//     consentReceived: true,
-//     currentlyWorking: true,
-
-//     candidateName: "Энхжин Саруул",
-//     candidatePhone: "9999-9002",
-//     candidateEmail: "enkhjin.saruul@email.com",
-//     candidateLinkedIn: "linkedin.com/in/enkhjin-saruul",
-//     candidateCurrentEmployment: "Design Studio – UX Designer",
-//     candidateInterestedField: "UX Research",
-//     cvUrl: "/cv/enkhjin-saruul.pdf",
-
-//     submittedDate: "2026-01-06",
-//     status: "APPROVED",
-//   },
-//   {
-//     id: "304",
-//     employeeName: "Тэмүүлэн Ариун",
-//     employeePhone: "9999-9010",
-//     employeeEmail: "temuulen.ariun@company.mn",
-//     employeeDepartment: "Өгөгдлийн алба",
-//     employeeJobLevel: "Senior",
-//     employeeJobType: "Бүтэн цагийн",
-//     relationshipWithCandidate: "Хамт ажиллаж байсан",
-//     referralReason: "SQL, Python чадвар маш сайн",
-//     consentReceived: true,
-//     currentlyWorking: true,
-
-//     candidateName: "Мөнхтөр Гэрэл",
-//     candidatePhone: "9999-9011",
-//     candidateEmail: "munkhtur.gerel@email.com",
-//     candidateLinkedIn: "linkedin.com/in/munkhtur-gerel",
-//     candidateCurrentEmployment: "Analytics Co – Data Analyst",
-//     candidateInterestedField: "Data Analytics",
-//     cvUrl: "/cv/munkhtur-gerel.pdf",
-
-//     submittedDate: "2026-01-04",
-//     status: "APPROVED",
-//   },
-// ];
-
-// // =====================================================
-// // ENUMS (ERD)
-// // =====================================================
-
-// export type JobTypeEnum =
-//   | "FULL_TIME"
-//   | "PART_TIME"
-//   | "SHIFT_BASED"
-//   | "SEASONAL"
-//   | "CONTRACT"
-//   | "TEMPORARY"
-//   | "OTHER";
-
-// export type JobLevelEnum =
-//   | "EXECUTIVE"
-//   | "UNIT_DIRECTOR"
-//   | "UNIT_HEAD"
-//   | "SENIOR_MANAGER"
-//   | "MANAGER"
-//   | "SENIOR_SPECIALIST"
-//   | "SPECIALIST"
-//   | "SENIOR_STAFF"
-//   | "EMPLOYEE"
-//   | "INTERN"
-//   | "OTHER";
-
-// export type RelationWithCandidateEnum =
-//   | "FORMER_COLLEAGUE"
-//   | "ALUMNI"
-//   | "FRIEND"
-//   | "FAMILY_RELATIVES"
-//   | "OTHER";
-
-// export type CandidateCurrentStatusEnum =
-//   | "CURRENTLY_EMPLOYED"
-//   | "STUDENT"
-//   | "UNEMPLOYED"
-//   | "OTHER";
-
-// export type ReferralStatusEnum = "SUBMITTED" | "APPROVED" | "REJECTED";
-
-// // =====================================================
-// // TYPES (ERD)
-// // =====================================================
-
-// export type HRD = {
-//   _id: string;
-//   hrClerkId: string;
-//   hrEmail: string;
-//   postedJobs: string[];
-//   createdAt: string;
-//   updatedAt: string;
-// };
-
-// export type Employee = {
-//   _id: string;
-//   employeeClerkId: string;
-//   employeeFirstName: string;
-//   employeeLastName: string;
-//   employeeTelNumber: string;
-//   employeeEmail: string;
-//   employeeDepartment: string;
-//   employeeJobTitle: string;
-//   employeeJobType: JobTypeEnum;
-//   employeeJobLevel: JobLevelEnum;
-//   createdAt: string;
-//   updatedAt: string;
-// };
-
-// export type PostedJob = {
-//   _id: string;
-//   jobTitle: string;
-//   jobDepartment: string;
-//   jobType: JobTypeEnum;
-//   jobLevel: JobLevelEnum;
-//   salaryMin: number;
-//   salaryMax: number;
-//   keyDuties: string[];
-//   requirements: string[];
-//   additionalNotes?: string;
-//   requiredSkills: string[];
-//   benefits: string[];
-//   contactInfo: string;
-//   location: string;
-//   createdAt: string;
-//   updatedAt: string;
-// };
-
-// export type Referral = {
-//   _id: string;
-//   postedJobId: string;
-//   referringEmployeeId: string;
-
-//   relationWithCandidate: RelationWithCandidateEnum;
-//   referralReason: string;
-
-//   candidateFirstName: string;
-//   candidateLastName: string;
-//   candidateTelNumber: string;
-//   candidateEmail: string;
-//   candidateLinkedinUrl?: string;
-
-//   candidateCurrentStatus: CandidateCurrentStatusEnum;
-//   candidateFieldOfInterest?: string;
-//   candidateResume?: string;
-
-//   hasCandidateConsent: boolean;
-//   isNotCurrentEmployee: boolean;
-
-//   referralStatus: ReferralStatusEnum;
-//   referralStatusUpdatedAt?: string;
-
-//   bonusAmount?: number;
-//   bonusApprovedAt?: string;
-
-//   createdAt: string;
-//   updatedAt: string;
-// };
-
-// // =====================================================
-// // MOCK DATA
-// // =====================================================
-
-// // ---------------- HRD ----------------
-
-// export const mockHRDs: HRD[] = [
-//   {
-//     _id: "hrd1",
-//     hrClerkId: "clerk_hr_001",
-//     hrEmail: "hr@company.mn",
-//     postedJobs: ["job1", "job2", "job3", "job4"],
-//     createdAt: "2026-01-01",
-//     updatedAt: "2026-01-10",
-//   },
-// ];
-
-// // ---------------- EMPLOYEES ----------------
-
-// export const mockEmployees: Employee[] = [
-//   {
-//     _id: "emp1",
-//     employeeClerkId: "clerk_emp_001",
-//     employeeFirstName: "Болд",
-//     employeeLastName: "Бат",
-//     employeeTelNumber: "9999-1111",
-//     employeeEmail: "bold.bat@company.mn",
-//     employeeDepartment: "Технологийн хэлтэс",
-//     employeeJobTitle: "Software Engineer",
-//     employeeJobType: "FULL_TIME",
-//     employeeJobLevel: "SENIOR_SPECIALIST",
-//     createdAt: "2025-12-01",
-//     updatedAt: "2026-01-01",
-//   },
-//   {
-//     _id: "emp2",
-//     employeeClerkId: "clerk_emp_002",
-//     employeeFirstName: "Сүх",
-//     employeeLastName: "Сарнай",
-//     employeeTelNumber: "9999-2222",
-//     employeeEmail: "sukh.sarnai@company.mn",
-//     employeeDepartment: "Технологийн хэлтэс",
-//     employeeJobTitle: "Senior Engineer",
-//     employeeJobType: "FULL_TIME",
-//     employeeJobLevel: "SENIOR_SPECIALIST",
-//     createdAt: "2025-11-15",
-//     updatedAt: "2026-01-01",
-//   },
-//   {
-//     _id: "emp3",
-//     employeeClerkId: "clerk_emp_003",
-//     employeeFirstName: "Бат-Эрдэнэ",
-//     employeeLastName: "Номин",
-//     employeeTelNumber: "9999-9001",
-//     employeeEmail: "nomiin.bat@company.mn",
-//     employeeDepartment: "Дизайны алба",
-//     employeeJobTitle: "UX Designer",
-//     employeeJobType: "FULL_TIME",
-//     employeeJobLevel: "SENIOR_SPECIALIST",
-//     createdAt: "2025-10-01",
-//     updatedAt: "2026-01-01",
-//   },
-//   {
-//     _id: "emp4",
-//     employeeClerkId: "clerk_emp_004",
-//     employeeFirstName: "Тэмүүлэн",
-//     employeeLastName: "Ариун",
-//     employeeTelNumber: "9999-9010",
-//     employeeEmail: "temuulen.ariun@company.mn",
-//     employeeDepartment: "Өгөгдлийн алба",
-//     employeeJobTitle: "Data Analyst",
-//     employeeJobType: "FULL_TIME",
-//     employeeJobLevel: "SENIOR_SPECIALIST",
-//     createdAt: "2025-09-10",
-//     updatedAt: "2026-01-01",
-//   },
-// ];
-
-// // ---------------- POSTED JOBS ----------------
-
-// export const mockPostedJobs: PostedJob[] = [
-//   {
-//     _id: "job1",
-//     jobTitle: "Senior Software Engineer",
-//     jobDepartment: "Технологийн хэлтэс",
-//     jobType: "FULL_TIME",
-//     jobLevel: "SENIOR_SPECIALIST",
-//     salaryMin: 3000000,
-//     salaryMax: 5000000,
-//     keyDuties: ["Backend development", "Code review"],
-//     requirements: ["5+ years experience"],
-//     additionalNotes: "Remote possible",
-//     requiredSkills: ["Node.js", "MongoDB"],
-//     benefits: ["Health insurance"],
-//     contactInfo: "hr@company.mn",
-//     location: "Ulaanbaatar",
-//     createdAt: "2026-01-01",
-//     updatedAt: "2026-01-01",
-//   },
-//   {
-//     _id: "job2",
-//     jobTitle: "Product Manager",
-//     jobDepartment: "Бүтээгдэхүүний хэлтэс",
-//     jobType: "FULL_TIME",
-//     jobLevel: "MANAGER",
-//     salaryMin: 3500000,
-//     salaryMax: 5500000,
-//     keyDuties: ["Product planning"],
-//     requirements: ["3+ years PM experience"],
-//     requiredSkills: ["Agile", "Communication"],
-//     benefits: ["Performance bonus"],
-//     contactInfo: "hr@company.mn",
-//     location: "Ulaanbaatar",
-//     createdAt: "2026-01-02",
-//     updatedAt: "2026-01-02",
-//   },
-//   {
-//     _id: "job3",
-//     jobTitle: "UX Designer",
-//     jobDepartment: "Дизайны алба",
-//     jobType: "FULL_TIME",
-//     jobLevel: "SPECIALIST",
-//     salaryMin: 2500000,
-//     salaryMax: 4000000,
-//     keyDuties: ["UX research", "Wireframing"],
-//     requirements: ["Portfolio required"],
-//     requiredSkills: ["Figma", "UX Research"],
-//     benefits: ["Flexible hours"],
-//     contactInfo: "hr@company.mn",
-//     location: "Ulaanbaatar",
-//     createdAt: "2026-01-05",
-//     updatedAt: "2026-01-05",
-//   },
-//   {
-//     _id: "job4",
-//     jobTitle: "Data Analyst",
-//     jobDepartment: "Өгөгдлийн алба",
-//     jobType: "FULL_TIME",
-//     jobLevel: "SPECIALIST",
-//     salaryMin: 3000000,
-//     salaryMax: 4500000,
-//     keyDuties: ["Data analysis", "Reporting"],
-//     requirements: ["SQL knowledge"],
-//     requiredSkills: ["SQL", "Python"],
-//     benefits: ["Health insurance"],
-//     contactInfo: "hr@company.mn",
-//     location: "Ulaanbaatar",
-//     createdAt: "2026-01-03",
-//     updatedAt: "2026-01-03",
-//   },
-// ];
-
-// // ---------------- REFERRALS ----------------
-
-// export const mockReferrals: Referral[] = [
-//   {
-//     _id: "ref1",
-//     postedJobId: "job1",
-//     referringEmployeeId: "emp1",
-//     relationWithCandidate: "FRIEND",
-//     referralReason: "Backend талдаа маш сайн",
-
-//     candidateFirstName: "Дорж",
-//     candidateLastName: "Цэцэг",
-//     candidateTelNumber: "9999-2222",
-//     candidateEmail: "dorj.tsetseg@email.com",
-//     candidateLinkedinUrl: "linkedin.com/in/dorj-tsetseg",
-
-//     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-//     candidateFieldOfInterest: "Backend Development",
-//     candidateResume: "/cv/dorj-tsetseg.pdf",
-
-//     hasCandidateConsent: true,
-//     isNotCurrentEmployee: true,
-
-//     referralStatus: "SUBMITTED",
-//     referralStatusUpdatedAt: "2026-01-12",
-
-//     createdAt: "2026-01-12",
-//     updatedAt: "2026-01-12",
-//   },
-//   {
-//     _id: "ref2",
-//     postedJobId: "job3",
-//     referringEmployeeId: "emp3",
-//     relationWithCandidate: "FORMER_COLLEAGUE",
-//     referralReason: "UX судалгаа, урсгалын ойлголт маш сайн",
-
-//     candidateFirstName: "Энхжин",
-//     candidateLastName: "Саруул",
-//     candidateTelNumber: "9999-9002",
-//     candidateEmail: "enkhjin.saruul@email.com",
-//     candidateLinkedinUrl: "linkedin.com/in/enkhjin-saruul",
-
-//     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-//     candidateFieldOfInterest: "UX Research",
-//     candidateResume: "/cv/enkhjin-saruul.pdf",
-
-//     hasCandidateConsent: true,
-//     isNotCurrentEmployee: true,
-
-//     referralStatus: "APPROVED",
-//     referralStatusUpdatedAt: "2026-01-06",
-
-//     bonusAmount: 500000,
-//     bonusApprovedAt: "2026-01-10",
-
-//     createdAt: "2026-01-06",
-//     updatedAt: "2026-01-10",
-//   },
-// ];
-
-// =====================================================
-// ENUMS (ERD)
-// =====================================================
-
 export type JobTypeEnum =
   | "FULL_TIME"
   | "PART_TIME"
@@ -733,6 +113,58 @@ export type Referral = {
   updatedAt: string;
 };
 
+export const JobTypeLabels: Record<JobTypeEnum, string> = {
+  FULL_TIME: "Үндсэн ажилтан",
+  PART_TIME: "Цагийн ажилтан",
+  SHIFT_BASED: "Ээлжийн ажил",
+  SEASONAL: "Улирлын чанартай",
+  CONTRACT: "Гэрээт",
+  TEMPORARY: "Түр ажилтан",
+  OTHER: "Бусад",
+};
+
+export const JobLevelLabels: Record<JobLevelEnum, string> = {
+  EXECUTIVE: "Удирдах албан тушаал",
+  UNIT_DIRECTOR: "Захирал",
+  UNIT_HEAD: "Албаны дарга",
+  SENIOR_MANAGER: "Ахлах менежер",
+  MANAGER: "Менежер",
+  SENIOR_SPECIALIST: "Ахлах мэргэжилтэн",
+  SPECIALIST: "Мэргэжилтэн",
+  SENIOR_STAFF: "Ахлах ажилтан",
+  EMPLOYEE: "Ажилтан",
+  INTERN: "Дадлагажигч",
+  OTHER: "Бусад",
+};
+
+export const RelationLabels: Record<RelationWithCandidateEnum, string> = {
+  FORMER_COLLEAGUE: "Хамт ажиллаж байсан",
+  ALUMNI: "Нэг сургуулийн төгсөгч",
+  FRIEND: "Найз нөхөд",
+  FAMILY_RELATIVES: "Гэр бүл, садан төрөл",
+  OTHER: "Бусад",
+};
+
+export const CandidateStatusLabels: Record<CandidateCurrentStatusEnum, string> =
+  {
+    CURRENTLY_EMPLOYED: "Ажил эрхэлж байгаа",
+    STUDENT: "Оюутан",
+    UNEMPLOYED: "Ажилгүй",
+    OTHER: "Бусад",
+  };
+
+export const ReferralStatusLabels: Record<ReferralStatusEnum, string> = {
+  SUBMITTED: "Шинэ",
+  APPROVED: "Зөвшөөрсөн",
+  REJECTED: "Татгалзсан",
+};
+
+export const ReferralStatusColors: Record<ReferralStatusEnum, string> = {
+  SUBMITTED: "#3B82F6", // Blue
+  APPROVED: "#10B981", // Green
+  REJECTED: "#EF4444", // Red
+};
+
 // =====================================================
 // MOCK DATA
 // =====================================================
@@ -811,345 +243,285 @@ export const mockEmployees: Employee[] = [
   },
 ];
 
-// ---------------- POSTED JOBS ----------------
-
 export const mockPostedJobs: PostedJob[] = [
+  // --- SUBMITTED (OPEN) JOBS ---
   {
-    _id: "job1",
+    _id: "job_sub_1",
     jobTitle: "Senior Software Engineer",
     jobDepartment: "Технологийн хэлтэс",
     jobType: "FULL_TIME",
     jobLevel: "SENIOR_SPECIALIST",
-    salaryMin: 3000000,
-    salaryMax: 5000000,
-    keyDuties: ["Backend development", "Code review"],
-    requirements: ["5+ years experience"],
-    additionalNotes: "Remote possible",
-    requiredSkills: ["Node.js", "MongoDB"],
-    benefits: ["Health insurance"],
-    contactInfo: "hr@company.mn",
-    location: "Ulaanbaatar",
-    createdAt: "2026-01-01",
-    updatedAt: "2026-01-01",
+    salaryMin: 4500000,
+    salaryMax: 6000000,
+    keyDuties: [
+      "Backend architecture",
+      "Mentoring junior devs",
+      "API optimization",
+    ],
+    requirements: [
+      "6+ years of Node.js experience",
+      "Strong system design skills",
+    ],
+    requiredSkills: ["Node.js", "PostgreSQL", "Redis"],
+    benefits: ["Flexible hours", "Private health insurance", "Learning budget"],
+    contactInfo: "hr_tech@company.mn",
+    location: "Ulaanbaatar (Hybrid)",
+    createdAt: "2026-01-10",
+    updatedAt: "2026-01-10",
   },
   {
-    _id: "job2",
-    jobTitle: "Product Manager",
-    jobDepartment: "Бүтээгдэхүүний хэлтэс",
+    _id: "job_sub_2",
+    jobTitle: "Growth Marketing Manager",
+    jobDepartment: "Маркетингийн хэлтэс",
     jobType: "FULL_TIME",
     jobLevel: "MANAGER",
-    salaryMin: 3500000,
-    salaryMax: 5500000,
-    keyDuties: ["Product planning"],
-    requirements: ["3+ years PM experience"],
-    requiredSkills: ["Agile", "Communication"],
-    benefits: ["Performance bonus"],
-    contactInfo: "hr@company.mn",
+    salaryMin: 3000000,
+    salaryMax: 4500000,
+    keyDuties: [
+      "User acquisition strategies",
+      "Funnel analysis",
+      "Ad campaign management",
+    ],
+    requirements: ["3+ years in digital marketing", "Data-driven mindset"],
+    requiredSkills: ["Google Ads", "Meta Business Suite", "SQL"],
+    benefits: ["Performance-based bonus", "Company laptop"],
+    contactInfo: "hr_marketing@company.mn",
     location: "Ulaanbaatar",
-    createdAt: "2026-01-02",
-    updatedAt: "2026-01-02",
+    createdAt: "2026-01-12",
+    updatedAt: "2026-01-12",
   },
+  // --- RESOLVED (COMPLETED) JOBS ---
   {
-    _id: "job3",
-    jobTitle: "UX Designer",
+    _id: "job_res_1",
+    jobTitle: "UI/UX Designer",
     jobDepartment: "Дизайны алба",
     jobType: "FULL_TIME",
     jobLevel: "SPECIALIST",
     salaryMin: 2500000,
-    salaryMax: 4000000,
-    keyDuties: ["UX research", "Wireframing"],
-    requirements: ["Portfolio required"],
-    requiredSkills: ["Figma", "UX Research"],
-    benefits: ["Flexible hours"],
-    contactInfo: "hr@company.mn",
+    salaryMax: 3800000,
+    keyDuties: ["Creating hi-fi prototypes", "Conducting user interviews"],
+    requirements: ["Strong Figma portfolio", "Understanding of design systems"],
+    requiredSkills: ["Figma", "Adobe CC", "Prototyping"],
+    benefits: ["Creative environment", "Gym membership"],
+    contactInfo: "hr_design@company.mn",
     location: "Ulaanbaatar",
-    createdAt: "2026-01-05",
-    updatedAt: "2026-01-05",
+    createdAt: "2025-12-01",
+    updatedAt: "2026-01-05", // Resolved date
   },
   {
-    _id: "job4",
+    _id: "job_res_2",
     jobTitle: "Data Analyst",
     jobDepartment: "Өгөгдлийн алба",
-    jobType: "FULL_TIME",
+    jobType: "CONTRACT",
     jobLevel: "SPECIALIST",
     salaryMin: 3000000,
-    salaryMax: 4500000,
-    keyDuties: ["Data analysis", "Reporting"],
-    requirements: ["SQL knowledge"],
-    requiredSkills: ["SQL", "Python"],
-    benefits: ["Health insurance"],
-    contactInfo: "hr@company.mn",
-    location: "Ulaanbaatar",
-    createdAt: "2026-01-03",
-    updatedAt: "2026-01-03",
+    salaryMax: 4000000,
+    keyDuties: ["Building BI dashboards", "Cleaning raw data"],
+    requirements: ["Proficiency in Python or R", "Excel mastery"],
+    requiredSkills: ["Tableau", "Python", "BigQuery"],
+    benefits: ["Remote work option"],
+    contactInfo: "hr_data@company.mn",
+    location: "Remote",
+    createdAt: "2025-11-20",
+    updatedAt: "2025-12-25", // Resolved date
   },
 ];
 
 // ---------------- REFERRALS ----------------
-
-// export const mockReferrals: Referral[] = [
-//   {
-//     _id: "ref1",
-//     postedJobId: "job1",
-//     referringEmployeeId: "emp1",
-//     relationWithCandidate: "FRIEND",
-//     referralReason: "Backend талдаа маш сайн",
-
-//     candidateFirstName: "Дорж",
-//     candidateLastName: "Цэцэг",
-//     candidateTelNumber: "9999-3333",
-//     candidateEmail: "dorj.tsetseg@email.com",
-//     candidateLinkedinUrl: "linkedin.com/in/dorj-tsetseg",
-
-//     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-//     candidateFieldOfInterest: "Backend Development",
-//     candidateResume: "/cv/dorj.pdf",
-
-//     hasCandidateConsent: true,
-//     isNotCurrentEmployee: true,
-
-//     referralStatus: "SUBMITTED",
-//     referralStatusUpdatedAt: "2026-01-12",
-
-//     createdAt: "2026-01-12",
-//     updatedAt: "2026-01-12",
-//   },
-//   {
-//     _id: "ref2",
-//     postedJobId: "job2",
-//     referringEmployeeId: "emp2",
-//     relationWithCandidate: "FRIEND",
-//     referralReason: "Backend талдаа маш сайн",
-
-//     candidateFirstName: "bla",
-//     candidateLastName: "bla",
-//     candidateTelNumber: "9999-3333",
-//     candidateEmail: "dorj.tsetseg@email.com",
-//     candidateLinkedinUrl: "linkedin.com/in/dorj-tsetseg",
-
-//     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-//     candidateFieldOfInterest: "Backend Development",
-//     candidateResume: "/cv/dorj.pdf",
-
-//     hasCandidateConsent: true,
-//     isNotCurrentEmployee: true,
-
-//     referralStatus: "SUBMITTED",
-//     referralStatusUpdatedAt: "2026-01-12",
-
-//     createdAt: "2026-01-12",
-//     updatedAt: "2026-01-12",
-//   },
-//   {
-//     _id: "ref3",
-//     postedJobId: "job3",
-//     referringEmployeeId: "emp3",
-//     relationWithCandidate: "FORMER_COLLEAGUE",
-//     referralReason: "UX судалгаа маш сайн",
-
-//     candidateFirstName: "Энхжин",
-//     candidateLastName: "Саруул",
-//     candidateTelNumber: "9999-9002",
-//     candidateEmail: "enkhjin@email.com",
-//     candidateLinkedinUrl: "linkedin.com/in/enkhjin-saruul",
-
-//     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-//     candidateFieldOfInterest: "UX Research",
-//     candidateResume: "/cv/enkhjin.pdf",
-
-//     hasCandidateConsent: true,
-//     isNotCurrentEmployee: true,
-
-//     referralStatus: "APPROVED",
-//     referralStatusUpdatedAt: "2026-01-06",
-
-//     bonusAmount: 500000,
-//     bonusApprovedAt: "2026-01-10",
-
-//     createdAt: "2026-01-06",
-//     updatedAt: "2026-01-10",
-//   },
-//   {
-//     _id: "ref3",
-//     postedJobId: "job4",
-//     referringEmployeeId: "emp4",
-//     relationWithCandidate: "ALUMNI",
-//     referralReason: "SQL, Python чадвар сайн",
-
-//     candidateFirstName: "Мөнхтөр",
-//     candidateLastName: "Гэрэл",
-//     candidateTelNumber: "9999-9011",
-//     candidateEmail: "munkhtur@email.com",
-
-//     candidateCurrentStatus: "UNEMPLOYED",
-//     candidateFieldOfInterest: "Data Analytics",
-
-//     hasCandidateConsent: true,
-//     isNotCurrentEmployee: true,
-
-//     referralStatus: "REJECTED",
-//     referralStatusUpdatedAt: "2026-01-08",
-
-//     createdAt: "2026-01-04",
-//     updatedAt: "2026-01-08",
-//   },
-// ];
-
+// ---------------- REFERRALS ----------------
 export const mockReferrals: Referral[] = [
+  // --- REFERRALS FOR SUBMITTED JOB 1 (Senior SWE) ---
   {
-    _id: "ref1",
-    postedJobId: "job1",
+    _id: "ref_101",
+    postedJobId: "job_sub_1",
     referringEmployeeId: "emp1",
-    relationWithCandidate: "FRIEND",
-    referralReason: "Backend архитектурын туршлага маш сайн",
-
-    candidateFirstName: "Дорж",
-    candidateLastName: "Цэцэг",
-    candidateTelNumber: "9999-1111",
-    candidateEmail: "dorj@email.com",
-
+    relationWithCandidate: "FORMER_COLLEAGUE",
+    referralReason: "Worked with him for 3 years. Exceptional troubleshooter.",
+    candidateFirstName: "Золбоо",
+    candidateLastName: "Төмөр",
+    candidateTelNumber: "8888-1010",
+    candidateEmail: "zolboo.t@gmail.com",
     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateFieldOfInterest: "Backend Development",
-
+    candidateFieldOfInterest: "Backend Engineering",
+    candidateResume: "/resumes/zolboo-t-backend.pdf",
+    candidateLinkedinUrl: "https://www.linkedin.com/in/zolboo-tech/", // Added
     hasCandidateConsent: true,
     isNotCurrentEmployee: true,
-
     referralStatus: "SUBMITTED",
-    referralStatusUpdatedAt: "2026-01-15",
-
     createdAt: "2026-01-15",
     updatedAt: "2026-01-15",
   },
-
   {
-    _id: "ref2",
-    postedJobId: "job1",
+    _id: "ref_102",
+    postedJobId: "job_sub_1",
     referringEmployeeId: "emp2",
-    relationWithCandidate: "FORMER_COLLEAGUE",
-    referralReason: "Node.js, API design дээр маш чадварлаг",
-
-    candidateFirstName: "Ганбат",
-    candidateLastName: "Мөнх",
-    candidateTelNumber: "9999-2222",
-    candidateEmail: "ganbat@email.com",
-
+    relationWithCandidate: "FRIEND",
+    referralReason:
+      "Strong knowledge of distributed systems and microservices.",
+    candidateFirstName: "Ану",
+    candidateLastName: "Эрдэнэ",
+    candidateTelNumber: "8888-2020",
+    candidateEmail: "anu.erdene@outlook.com",
     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateFieldOfInterest: "Backend Engineering",
-
+    candidateFieldOfInterest: "Software Architecture",
+    candidateResume: "/resumes/anu-e-architecture.pdf",
+    candidateLinkedinUrl: "https://www.linkedin.com/in/anu-erdene-arch/", // Added
     hasCandidateConsent: true,
     isNotCurrentEmployee: true,
-
-    referralStatus: "APPROVED",
-    referralStatusUpdatedAt: "2026-01-14",
-    candidateResume: "/cv/dorj-tsetseg.pdf",
-
-    bonusAmount: 500000,
-    bonusApprovedAt: "2026-01-16",
-
-    createdAt: "2026-01-13",
+    referralStatus: "SUBMITTED",
+    createdAt: "2026-01-16",
     updatedAt: "2026-01-16",
   },
 
+  // --- REFERRALS FOR SUBMITTED JOB 2 (Growth Marketing) ---
   {
-    _id: "ref3",
-    postedJobId: "job2",
-    referringEmployeeId: "emp2",
-    relationWithCandidate: "FRIEND",
-    referralReason: "Product roadmap болон stakeholder харилцаа сайн",
-
-    candidateFirstName: "Саруул",
-    candidateLastName: "Номин",
-    candidateTelNumber: "9999-3333",
-    candidateEmail: "saruul@email.com",
-
-    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateFieldOfInterest: "Product Management",
-
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-
-    referralStatus: "SUBMITTED",
-    referralStatusUpdatedAt: "2026-01-12",
-
-    createdAt: "2026-01-12",
-    updatedAt: "2026-01-12",
-  },
-
-  {
-    _id: "ref4",
-    postedJobId: "job3",
-    referringEmployeeId: "emp3",
-    relationWithCandidate: "FORMER_COLLEAGUE",
-    referralReason: "UX судалгаа, хэрэглэгчийн урсгал маш сайн",
-
-    candidateFirstName: "Энхжин",
-    candidateLastName: "Саруул",
-    candidateTelNumber: "9999-4444",
-    candidateEmail: "enkhjin@email.com",
-
-    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateFieldOfInterest: "UX Research",
-
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-
-    referralStatus: "APPROVED",
-    referralStatusUpdatedAt: "2026-01-10",
-
-    bonusAmount: 300000,
-    bonusApprovedAt: "2026-01-11",
-
-    createdAt: "2026-01-08",
-    updatedAt: "2026-01-11",
-  },
-
-  {
-    _id: "ref5",
-    postedJobId: "job3",
-    referringEmployeeId: "emp3",
-    relationWithCandidate: "ALUMNI",
-    referralReason: "Figma, design system дээр туршлагатай",
-
-    candidateFirstName: "Баярмаа",
-    candidateLastName: "Сондор",
-    candidateTelNumber: "9999-5555",
-    candidateEmail: "bayarmaa@email.com",
-
-    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateFieldOfInterest: "UI Design",
-
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-
-    referralStatus: "REJECTED",
-    referralStatusUpdatedAt: "2026-01-09",
-
-    createdAt: "2026-01-07",
-    updatedAt: "2026-01-09",
-  },
-
-  {
-    _id: "ref6",
-    postedJobId: "job4",
+    _id: "ref_201",
+    postedJobId: "job_sub_2",
     referringEmployeeId: "emp4",
-    relationWithCandidate: "FORMER_COLLEAGUE",
-    referralReason: "SQL, Python дээр өгөгдөл анализ сайн хийдэг",
-
-    candidateFirstName: "Мөнхтөр",
-    candidateLastName: "Гэрэл",
-    candidateTelNumber: "9999-6666",
-    candidateEmail: "munkhtur@email.com",
-
+    relationWithCandidate: "ALUMNI",
+    referralReason:
+      "Top of our class in Marketing, has 4 years of agency experience.",
+    candidateFirstName: "Чингүүн",
+    candidateLastName: "Болд",
+    candidateTelNumber: "8888-3030",
+    candidateEmail: "chingun.b@gmail.com",
     candidateCurrentStatus: "UNEMPLOYED",
-    candidateFieldOfInterest: "Data Analytics",
-
+    candidateFieldOfInterest: "Performance Marketing",
+    candidateResume: "/resumes/chingun-b-marketing.pdf",
+    candidateLinkedinUrl: "https://www.linkedin.com/in/chingun-marketing/", // Added
     hasCandidateConsent: true,
     isNotCurrentEmployee: true,
+    referralStatus: "SUBMITTED",
+    createdAt: "2026-01-17",
+    updatedAt: "2026-01-17",
+  },
+  {
+    _id: "ref_202",
+    postedJobId: "job_sub_2",
+    referringEmployeeId: "emp1",
+    relationWithCandidate: "FRIEND",
+    referralReason: "Highly creative person with great analytical skills.",
+    candidateFirstName: "Мишээл",
+    candidateLastName: "Ганзориг",
+    candidateTelNumber: "8888-4040",
+    candidateEmail: "misheel.g@gmail.com",
+    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
+    candidateFieldOfInterest: "Digital Strategy",
+    candidateResume: "/resumes/misheel-g-cv.pdf",
+    candidateLinkedinUrl: "https://www.linkedin.com/in/misheel-ganzo/", // Added
+    hasCandidateConsent: true,
+    isNotCurrentEmployee: true,
+    referralStatus: "SUBMITTED",
+    createdAt: "2026-01-18",
+    updatedAt: "2026-01-18",
+  },
 
+  // --- REFERRALS FOR RESOLVED JOB 1 (UI/UX) ---
+  {
+    _id: "ref_301",
+    postedJobId: "job_res_1",
+    referringEmployeeId: "emp3",
+    relationWithCandidate: "FORMER_COLLEAGUE",
+    referralReason: "Her portfolio matches our design system perfectly.",
+    candidateFirstName: "Намуун",
+    candidateLastName: "Баяр",
+    candidateTelNumber: "8888-5050",
+    candidateEmail: "namuun.b@yahoo.com",
+    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
+    candidateResume: "/cv/namuun_ux.pdf",
+    candidateLinkedinUrl: "https://www.linkedin.com/in/namuun-uiux/", // Added
+    hasCandidateConsent: true,
+    isNotCurrentEmployee: true,
+    referralStatus: "APPROVED",
+    referralStatusUpdatedAt: "2026-01-05",
+    bonusAmount: 400000,
+    bonusApprovedAt: "2026-01-06",
+    createdAt: "2025-12-10",
+    updatedAt: "2026-01-06",
+  },
+  {
+    _id: "ref_302",
+    postedJobId: "job_res_1",
+    referringEmployeeId: "emp1",
+    relationWithCandidate: "OTHER",
+    referralReason: "Junior designer looking for a career change.",
+    candidateFirstName: "Тулга",
+    candidateLastName: "Даваа",
+    candidateTelNumber: "8888-6060",
+    candidateEmail: "tulga.d@gmail.com",
+    candidateCurrentStatus: "STUDENT",
+    candidateResume: "/resumes/tulga-d-student.pdf",
+    candidateLinkedinUrl: "https://www.linkedin.com/in/tulga-d-designer/", // Added
+    hasCandidateConsent: true,
+    isNotCurrentEmployee: true,
     referralStatus: "REJECTED",
-    referralStatusUpdatedAt: "2026-01-08",
+    referralStatusUpdatedAt: "2025-12-20",
+    createdAt: "2025-12-12",
+    updatedAt: "2025-12-20",
+  },
 
-    createdAt: "2026-01-06",
-    updatedAt: "2026-01-08",
+  // --- REFERRALS FOR RESOLVED JOB 2 (Data Analyst) ---
+  {
+    _id: "ref_401",
+    postedJobId: "job_res_2",
+    referringEmployeeId: "emp4",
+    relationWithCandidate: "ALUMNI",
+    referralReason: "Expert in SQL and Python. Very detail oriented.",
+    candidateFirstName: "Хангай",
+    candidateLastName: "Энх",
+    candidateTelNumber: "8888-7070",
+    candidateEmail: "khangai.e@data.mn",
+    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
+    candidateResume: "/cv/khangai_data.pdf",
+    candidateLinkedinUrl: "https://www.linkedin.com/in/khangai-enkh-data/", // Added
+    hasCandidateConsent: true,
+    isNotCurrentEmployee: true,
+    referralStatus: "APPROVED",
+    referralStatusUpdatedAt: "2025-12-25",
+    bonusAmount: 350000,
+    bonusApprovedAt: "2025-12-26",
+    createdAt: "2025-11-25",
+    updatedAt: "2025-12-26",
+  },
+  {
+    _id: "ref_402",
+    postedJobId: "job_res_2",
+    referringEmployeeId: "emp3",
+    relationWithCandidate: "FRIEND",
+    referralReason: "Knows basic Excel, wants to learn more data analysis.",
+    candidateFirstName: "Сарнай",
+    candidateLastName: "Мөнх",
+    candidateTelNumber: "8888-8080",
+    candidateEmail: "sarnai.m@gmail.com",
+    candidateCurrentStatus: "OTHER",
+    candidateResume: "/resumes/sarnai-m-data.pdf",
+    candidateLinkedinUrl: "https://www.linkedin.com/in/sarnai-analyst/", // Added
+    hasCandidateConsent: true,
+    isNotCurrentEmployee: true,
+    referralStatus: "REJECTED",
+    referralStatusUpdatedAt: "2025-12-10",
+    createdAt: "2025-11-26",
+    updatedAt: "2025-12-10",
+  },
+  {
+    _id: "ref_403",
+    postedJobId: "job_res_2",
+    referringEmployeeId: "emp2",
+    relationWithCandidate: "FORMER_COLLEAGUE",
+    referralReason:
+      "Experienced analyst but requires a higher salary than offered.",
+    candidateFirstName: "Билгүүн",
+    candidateLastName: "Зориг",
+    candidateTelNumber: "8888-9090",
+    candidateEmail: "bilguun.z@gmail.com",
+    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
+    candidateResume: "/resumes/bilguun-z-senior.pdf",
+    candidateLinkedinUrl: "https://www.linkedin.com/in/bilguun-zorig-data/", // Added
+    hasCandidateConsent: true,
+    isNotCurrentEmployee: true,
+    referralStatus: "REJECTED",
+    referralStatusUpdatedAt: "2025-12-15",
+    createdAt: "2025-11-28",
+    updatedAt: "2025-12-15",
   },
 ];
