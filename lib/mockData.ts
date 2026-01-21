@@ -887,98 +887,257 @@ export const mockPostedJobs: PostedJob[] = [
 
 // ---------------- REFERRALS ----------------
 
+// export const mockReferrals: Referral[] = [
+//   {
+//     _id: "ref1",
+//     postedJobId: "job1",
+//     referringEmployeeId: "emp1",
+//     relationWithCandidate: "FRIEND",
+//     referralReason: "Backend талдаа маш сайн",
+
+//     candidateFirstName: "Дорж",
+//     candidateLastName: "Цэцэг",
+//     candidateTelNumber: "9999-3333",
+//     candidateEmail: "dorj.tsetseg@email.com",
+//     candidateLinkedinUrl: "linkedin.com/in/dorj-tsetseg",
+
+//     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
+//     candidateFieldOfInterest: "Backend Development",
+//     candidateResume: "/cv/dorj.pdf",
+
+//     hasCandidateConsent: true,
+//     isNotCurrentEmployee: true,
+
+//     referralStatus: "SUBMITTED",
+//     referralStatusUpdatedAt: "2026-01-12",
+
+//     createdAt: "2026-01-12",
+//     updatedAt: "2026-01-12",
+//   },
+//   {
+//     _id: "ref2",
+//     postedJobId: "job2",
+//     referringEmployeeId: "emp2",
+//     relationWithCandidate: "FRIEND",
+//     referralReason: "Backend талдаа маш сайн",
+
+//     candidateFirstName: "bla",
+//     candidateLastName: "bla",
+//     candidateTelNumber: "9999-3333",
+//     candidateEmail: "dorj.tsetseg@email.com",
+//     candidateLinkedinUrl: "linkedin.com/in/dorj-tsetseg",
+
+//     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
+//     candidateFieldOfInterest: "Backend Development",
+//     candidateResume: "/cv/dorj.pdf",
+
+//     hasCandidateConsent: true,
+//     isNotCurrentEmployee: true,
+
+//     referralStatus: "SUBMITTED",
+//     referralStatusUpdatedAt: "2026-01-12",
+
+//     createdAt: "2026-01-12",
+//     updatedAt: "2026-01-12",
+//   },
+//   {
+//     _id: "ref3",
+//     postedJobId: "job3",
+//     referringEmployeeId: "emp3",
+//     relationWithCandidate: "FORMER_COLLEAGUE",
+//     referralReason: "UX судалгаа маш сайн",
+
+//     candidateFirstName: "Энхжин",
+//     candidateLastName: "Саруул",
+//     candidateTelNumber: "9999-9002",
+//     candidateEmail: "enkhjin@email.com",
+//     candidateLinkedinUrl: "linkedin.com/in/enkhjin-saruul",
+
+//     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
+//     candidateFieldOfInterest: "UX Research",
+//     candidateResume: "/cv/enkhjin.pdf",
+
+//     hasCandidateConsent: true,
+//     isNotCurrentEmployee: true,
+
+//     referralStatus: "APPROVED",
+//     referralStatusUpdatedAt: "2026-01-06",
+
+//     bonusAmount: 500000,
+//     bonusApprovedAt: "2026-01-10",
+
+//     createdAt: "2026-01-06",
+//     updatedAt: "2026-01-10",
+//   },
+//   {
+//     _id: "ref3",
+//     postedJobId: "job4",
+//     referringEmployeeId: "emp4",
+//     relationWithCandidate: "ALUMNI",
+//     referralReason: "SQL, Python чадвар сайн",
+
+//     candidateFirstName: "Мөнхтөр",
+//     candidateLastName: "Гэрэл",
+//     candidateTelNumber: "9999-9011",
+//     candidateEmail: "munkhtur@email.com",
+
+//     candidateCurrentStatus: "UNEMPLOYED",
+//     candidateFieldOfInterest: "Data Analytics",
+
+//     hasCandidateConsent: true,
+//     isNotCurrentEmployee: true,
+
+//     referralStatus: "REJECTED",
+//     referralStatusUpdatedAt: "2026-01-08",
+
+//     createdAt: "2026-01-04",
+//     updatedAt: "2026-01-08",
+//   },
+// ];
+
 export const mockReferrals: Referral[] = [
   {
     _id: "ref1",
     postedJobId: "job1",
     referringEmployeeId: "emp1",
     relationWithCandidate: "FRIEND",
-    referralReason: "Backend талдаа маш сайн",
+    referralReason: "Backend архитектурын туршлага маш сайн",
 
     candidateFirstName: "Дорж",
     candidateLastName: "Цэцэг",
-    candidateTelNumber: "9999-3333",
-    candidateEmail: "dorj.tsetseg@email.com",
-    candidateLinkedinUrl: "linkedin.com/in/dorj-tsetseg",
+    candidateTelNumber: "9999-1111",
+    candidateEmail: "dorj@email.com",
 
     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
     candidateFieldOfInterest: "Backend Development",
-    candidateResume: "/cv/dorj.pdf",
 
     hasCandidateConsent: true,
     isNotCurrentEmployee: true,
 
     referralStatus: "SUBMITTED",
-    referralStatusUpdatedAt: "2026-01-12",
+    referralStatusUpdatedAt: "2026-01-15",
 
-    createdAt: "2026-01-12",
-    updatedAt: "2026-01-12",
+    createdAt: "2026-01-15",
+    updatedAt: "2026-01-15",
   },
+
   {
     _id: "ref2",
-    postedJobId: "job2",
+    postedJobId: "job1",
     referringEmployeeId: "emp2",
-    relationWithCandidate: "FRIEND",
-    referralReason: "Backend талдаа маш сайн",
-
-    candidateFirstName: "bla",
-    candidateLastName: "bla",
-    candidateTelNumber: "9999-3333",
-    candidateEmail: "dorj.tsetseg@email.com",
-    candidateLinkedinUrl: "linkedin.com/in/dorj-tsetseg",
-
-    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateFieldOfInterest: "Backend Development",
-    candidateResume: "/cv/dorj.pdf",
-
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-
-    referralStatus: "SUBMITTED",
-    referralStatusUpdatedAt: "2026-01-12",
-
-    createdAt: "2026-01-12",
-    updatedAt: "2026-01-12",
-  },
-  {
-    _id: "ref3",
-    postedJobId: "job3",
-    referringEmployeeId: "emp3",
     relationWithCandidate: "FORMER_COLLEAGUE",
-    referralReason: "UX судалгаа маш сайн",
+    referralReason: "Node.js, API design дээр маш чадварлаг",
 
-    candidateFirstName: "Энхжин",
-    candidateLastName: "Саруул",
-    candidateTelNumber: "9999-9002",
-    candidateEmail: "enkhjin@email.com",
-    candidateLinkedinUrl: "linkedin.com/in/enkhjin-saruul",
+    candidateFirstName: "Ганбат",
+    candidateLastName: "Мөнх",
+    candidateTelNumber: "9999-2222",
+    candidateEmail: "ganbat@email.com",
 
     candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateFieldOfInterest: "UX Research",
-    candidateResume: "/cv/enkhjin.pdf",
+    candidateFieldOfInterest: "Backend Engineering",
 
     hasCandidateConsent: true,
     isNotCurrentEmployee: true,
 
     referralStatus: "APPROVED",
-    referralStatusUpdatedAt: "2026-01-06",
+    referralStatusUpdatedAt: "2026-01-14",
+    candidateResume: "/cv/dorj-tsetseg.pdf",
 
     bonusAmount: 500000,
-    bonusApprovedAt: "2026-01-10",
+    bonusApprovedAt: "2026-01-16",
 
-    createdAt: "2026-01-06",
-    updatedAt: "2026-01-10",
+    createdAt: "2026-01-13",
+    updatedAt: "2026-01-16",
   },
+
   {
     _id: "ref3",
+    postedJobId: "job2",
+    referringEmployeeId: "emp2",
+    relationWithCandidate: "FRIEND",
+    referralReason: "Product roadmap болон stakeholder харилцаа сайн",
+
+    candidateFirstName: "Саруул",
+    candidateLastName: "Номин",
+    candidateTelNumber: "9999-3333",
+    candidateEmail: "saruul@email.com",
+
+    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
+    candidateFieldOfInterest: "Product Management",
+
+    hasCandidateConsent: true,
+    isNotCurrentEmployee: true,
+
+    referralStatus: "SUBMITTED",
+    referralStatusUpdatedAt: "2026-01-12",
+
+    createdAt: "2026-01-12",
+    updatedAt: "2026-01-12",
+  },
+
+  {
+    _id: "ref4",
+    postedJobId: "job3",
+    referringEmployeeId: "emp3",
+    relationWithCandidate: "FORMER_COLLEAGUE",
+    referralReason: "UX судалгаа, хэрэглэгчийн урсгал маш сайн",
+
+    candidateFirstName: "Энхжин",
+    candidateLastName: "Саруул",
+    candidateTelNumber: "9999-4444",
+    candidateEmail: "enkhjin@email.com",
+
+    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
+    candidateFieldOfInterest: "UX Research",
+
+    hasCandidateConsent: true,
+    isNotCurrentEmployee: true,
+
+    referralStatus: "APPROVED",
+    referralStatusUpdatedAt: "2026-01-10",
+
+    bonusAmount: 300000,
+    bonusApprovedAt: "2026-01-11",
+
+    createdAt: "2026-01-08",
+    updatedAt: "2026-01-11",
+  },
+
+  {
+    _id: "ref5",
+    postedJobId: "job3",
+    referringEmployeeId: "emp3",
+    relationWithCandidate: "ALUMNI",
+    referralReason: "Figma, design system дээр туршлагатай",
+
+    candidateFirstName: "Баярмаа",
+    candidateLastName: "Сондор",
+    candidateTelNumber: "9999-5555",
+    candidateEmail: "bayarmaa@email.com",
+
+    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
+    candidateFieldOfInterest: "UI Design",
+
+    hasCandidateConsent: true,
+    isNotCurrentEmployee: true,
+
+    referralStatus: "REJECTED",
+    referralStatusUpdatedAt: "2026-01-09",
+
+    createdAt: "2026-01-07",
+    updatedAt: "2026-01-09",
+  },
+
+  {
+    _id: "ref6",
     postedJobId: "job4",
     referringEmployeeId: "emp4",
-    relationWithCandidate: "ALUMNI",
-    referralReason: "SQL, Python чадвар сайн",
+    relationWithCandidate: "FORMER_COLLEAGUE",
+    referralReason: "SQL, Python дээр өгөгдөл анализ сайн хийдэг",
 
     candidateFirstName: "Мөнхтөр",
     candidateLastName: "Гэрэл",
-    candidateTelNumber: "9999-9011",
+    candidateTelNumber: "9999-6666",
     candidateEmail: "munkhtur@email.com",
 
     candidateCurrentStatus: "UNEMPLOYED",
@@ -990,7 +1149,7 @@ export const mockReferrals: Referral[] = [
     referralStatus: "REJECTED",
     referralStatusUpdatedAt: "2026-01-08",
 
-    createdAt: "2026-01-04",
+    createdAt: "2026-01-06",
     updatedAt: "2026-01-08",
   },
 ];

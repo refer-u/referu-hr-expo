@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { Fonts } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme.web";
 import { useState } from "react";
 import ReferralsJobCards from "../_components/ReferralsJobCards";
 import ResolvedJobCards from "../_components/ResolvedJobCards";
@@ -9,14 +10,16 @@ export default function TabThreeScreen() {
   const [activeTab, setActiveTab] = useState<"incoming" | "resolved">(
     "incoming"
   );
+  const scheme = useColorScheme();
 
   return (
     <View
       style={{
-        backgroundColor: "#ffffff",
+        // backgroundColor: "#ffffff",
         paddingHorizontal: 25,
         paddingVertical: 70,
         height: "100%",
+        backgroundColor: scheme === "dark" ? "#191a1bff" : "#ffffffff",
       }}
     >
       <View

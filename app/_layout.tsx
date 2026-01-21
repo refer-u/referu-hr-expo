@@ -20,7 +20,22 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="referrals" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="referrals"
+          options={{
+            title: "Санал ирсэн хүмүүс",
+            headerBackTitle: "Буцах",
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="referralDetail"
+          options={{
+            title: "Саналын дэлгэрэнгүй",
+            headerBackTitle: "Буцах",
+            headerShadowVisible: false,
+          }}
+        />
         <Stack.Screen
           name="modal"
           options={{ presentation: "modal", title: "Modal" }}
