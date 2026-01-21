@@ -1,50 +1,68 @@
 import { Fonts } from "@/constants/theme";
-import { mockJobs } from "@/lib/mockData";
+import { mockPostedJobs, mockReferrals } from "@/lib/mockData";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function ReferralsJobCards() {
   const router = useRouter();
-  const referralJobs = mockJobs.filter((jobs) => jobs.status === "SUBMITTED");
 
-  const handleReferrals = () => {
-    router.push("/referrals/Referrals");
+  const referralJobs = mockPostedJobs
+    .map((job) => {
+      const submittedReferrals = mockReferrals.filter(
+        (ref) =>
+          ref.postedJobId === job._id && ref.referralStatus === "SUBMITTED",
+      );
+
+      return {
+        ...job,
+        referralCount: submittedReferrals.length,
+      };
+    })
+    .filter((job) => job.referralCount > 0);
+
+  const handleReferrals = (jobId: string) => {
+    router.push({ pathname: "/referrals/[jobId]", params: { jobId } });
   };
+
   return (
     <View>
-      <View style={{ flexDirection: "column", gap: 10 }}>
-        {referralJobs.map((jobs) => (
-          <View key={jobs.id}>
-            <Pressable onPress={handleReferrals}>
-              <View style={styles.cardContainer}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text style={styles.titleText}>{jobs.title}</Text>
-                  <View style={styles.countBadge}>
-                    <Text
-                      style={{
-                        color: "#193cb8",
-                        fontWeight: 500,
-                        fontSize: 16,
-                      }}
-                    >
-                      {jobs.referralCount} санал
-                    </Text>
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+        <View style={{ flexDirection: "column", gap: 10 }}>
+          {referralJobs.map((job) => (
+            <View key={job._id}>
+              <Pressable onPress={() => handleReferrals(job._id)}>
+                <View style={styles.cardContainer}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text style={styles.titleText}>{job.jobTitle}</Text>
+                    <View style={styles.countBadge}>
+                      <Text
+                        style={{
+                          color: "#193cb8",
+                          fontWeight: 600,
+                          fontSize: 12,
+                        }}
+                      >
+                        {job.referralCount} санал
+                      </Text>
+                    </View>
                   </View>
-                </View>
 
-                <Text style={styles.departmentTitle}>{jobs.department}</Text>
-              </View>
-            </Pressable>
-          </View>
-        ))}
-      </View>
+                  <Text style={styles.departmentTitle}>
+                    {job.jobDepartment}
+                  </Text>
+                </View>
+              </Pressable>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -78,7 +96,7 @@ const styles = StyleSheet.create({
   },
   countBadge: {
     backgroundColor: "#dbeafe",
-    width: 70,
+    width: "auto",
     paddingVertical: 2,
     paddingHorizontal: 8,
     flexDirection: "row",
