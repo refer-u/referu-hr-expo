@@ -270,6 +270,7 @@ function Select({
 
 const styles = StyleSheet.create({
   wrapper: {
+    marginTop: 16,
     padding: 16,
     paddingBottom: 120,
   },
