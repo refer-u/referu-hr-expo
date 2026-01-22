@@ -1,6 +1,7 @@
 import { Fonts } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme.web";
 import {
+  mockEmployees,
   mockReferrals,
   ReferralStatusColors,
   ReferralStatusLabels,
@@ -17,6 +18,8 @@ const Index = () => {
   const filteredReferrals = mockReferrals.filter(
     (referral) => referral.postedJobId === jobId,
   );
+
+  // console.log({ employee });
 
   const handleReferralDetail = (referralId: string) => {
     router.push({
@@ -35,64 +38,104 @@ const Index = () => {
     >
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <View style={{ flexDirection: "column", gap: 16 }}>
-          {filteredReferrals.map((referral) => (
-            <View key={referral._id}>
-              <Pressable onPress={() => handleReferralDetail(referral._id)}>
-                <View style={styles.cardContainer}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <View style={{ flexDirection: "column", gap: 3 }}>
-                      <Text style={styles.titleText}>
-                        {referral.candidateFirstName}{" "}
-                        {referral.candidateLastName}
-                      </Text>
-                      <Text style={{ color: "gray", fontSize: 12 }}>
-                        Санал болгосон
-                      </Text>
-                    </View>
-
+          {filteredReferrals.map((referral) => {
+            const employee = mockEmployees.find(
+              (emp) => emp._id === referral.referringEmployeeId,
+            );
+            return (
+              <View key={referral._id}>
+                <Pressable onPress={() => handleReferralDetail(referral._id)}>
+                  <View style={styles.cardContainer}>
                     <View
-                      style={[
-                        styles.countBadge,
-                        {
-                          backgroundColor:
-                            ReferralStatusColors[referral.referralStatus] +
-                            "20",
-                        },
-                      ]}
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
                     >
-                      <Text
-                        style={{
-                          color: ReferralStatusColors[referral.referralStatus],
-                          fontWeight: 600,
-                          fontSize: 12,
-                        }}
-                      >
-                        {ReferralStatusLabels[referral.referralStatus]}
-                      </Text>
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      width: "100%",
-                      borderColor: "#e7e5e5ff",
-                      opacity: 5,
-                      borderWidth: 0.5,
-                    }}
-                  />
+                      <View style={{ flexDirection: "column", gap: 3 }}>
+                        <Text style={styles.titleText}>
+                          {referral.candidateFirstName}{" "}
+                          {referral.candidateLastName}
+                        </Text>
+                        <Text style={{ color: "gray", fontSize: 12 }}>
+                          Санал болгосон
+                        </Text>
+                      </View>
 
-                  <Text style={styles.departmentTitle}>
-                    Огноо: {referral.createdAt}
-                  </Text>
-                </View>
-              </Pressable>
-            </View>
-          ))}
+                      {/* badge */}
+                      <View
+                        style={[
+                          styles.countBadge,
+                          {
+                            backgroundColor:
+                              ReferralStatusColors[referral.referralStatus] +
+                              "20",
+                          },
+                        ]}
+                      >
+                        <Text
+                          style={{
+                            color:
+                              ReferralStatusColors[referral.referralStatus],
+                            fontWeight: 600,
+                            fontSize: 12,
+                          }}
+                        >
+                          {ReferralStatusLabels[referral.referralStatus]}
+                        </Text>
+                      </View>
+                    </View>
+
+                    {/* separator */}
+                    <View
+                      style={{
+                        width: "100%",
+                        borderColor: "#e7e5e5ff",
+                        opacity: 5,
+                        borderWidth: 0.5,
+                      }}
+                    />
+
+                    {employee && (
+                      <View style={{ marginTop: 8 }}>
+                        <Text
+                          style={{
+                            fontSize: 16,
+                            fontWeight: 500,
+                            fontFamily: Fonts.sans,
+                          }}
+                        >
+                          {employee.employeeFirstName}{" "}
+                          {employee.employeeLastName}
+                        </Text>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            gap: 4,
+                            alignItems: "center",
+                          }}
+                        >
+                          <Text style={styles.employeeJobTitle}>
+                            {employee.employeeDepartment}
+                          </Text>
+                          <Text style={styles.employeeJobTitle}>•</Text>
+                          <Text style={styles.employeeJobTitle}>
+                            {" "}
+                            {employee.employeeJobTitle}
+                          </Text>
+                        </View>
+                      </View>
+                    )}
+
+                    <Text style={styles.departmentTitle}>
+                      Огноо: {referral.createdAt}
+                    </Text>
+                  </View>
+                </Pressable>
+              </View>
+            );
+          })}
         </View>
       </ScrollView>
     </View>
@@ -128,6 +171,11 @@ const styles = StyleSheet.create({
   departmentTitle: {
     color: "#737373",
     marginTop: 12,
+    fontSize: 14,
+  },
+  employeeJobTitle: {
+    color: "#737373",
+    marginTop: 5,
     fontSize: 14,
   },
   countBadge: {
