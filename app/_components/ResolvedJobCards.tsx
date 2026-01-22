@@ -13,7 +13,7 @@ export default function ResolvedJobCards() {
         (ref) =>
           ref.postedJobId === job._id &&
           (ref.referralStatus === "APPROVED" ||
-            ref.referralStatus === "REJECTED"),
+            ref.referralStatus === "REJECTED")
       );
 
       return {
@@ -55,7 +55,7 @@ export default function ResolvedJobCards() {
                           fontSize: 12,
                         }}
                       >
-                        Шийдсэн
+                        Шийдвэрлэгдсэн
                       </Text>
                     </View>
                   </View>

@@ -2,6 +2,7 @@ import { useColorScheme } from "@/hooks/use-color-scheme.web";
 import {
   CandidateStatusLabels,
   JobLevelLabels,
+  JobTypeLabels,
   mockEmployees,
   mockReferrals,
   ReferralStatusColors,
@@ -97,41 +98,118 @@ const ReferralDetail = () => {
 
           {employee && (
             <View style={styles.infoList}>
-              <Text style={styles.label}>
-                Нэр:
+              <View style={styles.infoStyle}>
+                <Text style={styles.label}>Нэр:</Text>
                 <Text style={styles.value}>
                   {employee.employeeFirstName} {employee.employeeLastName}
                 </Text>
-              </Text>
-              <Text style={styles.label}>
-                Утас:
-                <Text style={styles.value}>{employee.employeeTelNumber}</Text>
-              </Text>
-              <Text style={styles.label}>
-                Хэлтэс:
+              </View>
+
+              {employee && (
+                <Pressable
+                  onPress={() => {
+                    if (employee.employeeTelNumber) {
+                      const cleanNumber = employee.employeeTelNumber.replace(
+                        /\s/g,
+                        "",
+                      );
+                      Linking.openURL(`tel:${cleanNumber}`);
+                    }
+                  }}
+                  style={({ pressed }) => [
+                    styles.infoStyle,
+                    { opacity: pressed ? 0.5 : 1 },
+                  ]}
+                >
+                  <Text style={styles.label}>Утас:</Text>
+                  <View style={{ flex: 1 }}>
+                    <Text
+                      style={[
+                        styles.value,
+                        { color: "#0077b5", textDecorationLine: "underline" },
+                      ]}
+                    >
+                      {employee.employeeTelNumber}
+                    </Text>
+                  </View>
+                </Pressable>
+              )}
+
+              {employee && (
+                <Pressable
+                  onPress={() => {
+                    if (employee.employeeEmail) {
+                      Linking.openURL(`mailto:${employee.employeeEmail}`);
+                    }
+                  }}
+                  style={({ pressed }) => [
+                    styles.infoStyle,
+                    { opacity: pressed ? 0.5 : 1, marginTop: 4 },
+                  ]}
+                >
+                  <Text style={styles.label}>И-мэйл:</Text>
+                  <View style={{ flex: 1 }}>
+                    <Text
+                      style={[
+                        styles.value,
+                        { color: "#0077b5", textDecorationLine: "underline" },
+                      ]}
+                    >
+                      {employee.employeeEmail}
+                    </Text>
+                  </View>
+                </Pressable>
+              )}
+
+              <View style={styles.infoStyle}>
+                <Text style={styles.label}>Хэлтэс:</Text>
                 <Text style={styles.value}>{employee.employeeDepartment}</Text>
-              </Text>
-              <Text style={styles.label}>
-                Түвшин:
+              </View>
+              <View style={styles.infoStyle}>
+                <Text style={styles.label}>Түвшин:</Text>
                 <Text style={styles.value}>
                   {JobLevelLabels[employee.employeeJobLevel]}
                 </Text>
-              </Text>
+              </View>
+              <View style={styles.infoStyle}>
+                <Text style={styles.label}>Ажлын төрөл:</Text>
+                <Text style={styles.value}>
+                  {JobTypeLabels[employee.employeeJobType]}
+                </Text>
+              </View>
             </View>
           )}
 
           <View style={styles.divider} />
           <View style={{ gap: 10 }}>
-            <Text style={styles.label}>
-              Харилцаа:
-              <Text style={styles.value}>
-                {RelationLabels[referralData.relationWithCandidate]}
+            <View>
+              <Text style={styles.label}>
+                Санал болгож буй хүнтэй харилцаа:
               </Text>
-            </Text>
-            <Text style={styles.label}>
-              Шалтгаан:
-              <Text style={styles.value}>{referralData.referralReason}</Text>
-            </Text>
+              <View style={{ flex: 1, marginTop: 5 }}>
+                <Text style={styles.value}>
+                  {RelationLabels[referralData.relationWithCandidate]}
+                </Text>
+              </View>
+            </View>
+            <View>
+              <Text style={styles.label}>Санал болгох шалтгаан:</Text>
+              <View style={{ flex: 1, marginTop: 5 }}>
+                <Text style={styles.value}>{referralData.referralReason}</Text>
+              </View>
+            </View>
+            <View style={styles.infoStyle}>
+              <Text style={styles.label}>Зөвшөөрөл авсан эсэх: </Text>
+              <Text style={styles.value}>
+                {referralData.hasCandidateConsent ? "Тийм" : "Үгүй"}
+              </Text>
+            </View>
+            <View style={styles.infoStyle}>
+              <Text style={styles.label}>Одоо ажиллаж байгаа эсэх: </Text>
+              <Text style={styles.value}>
+                {referralData.isNotCurrentEmployee ? "Тийм" : "Үгүй"}
+              </Text>
+            </View>
           </View>
         </View>
 
@@ -146,13 +224,14 @@ const ReferralDetail = () => {
                 alignItems: "center",
               }}
             >
-              <Text style={styles.label}>
-                Нэр:
+              <View style={styles.infoStyle}>
+                <Text style={styles.label}>Нэр:</Text>
                 <Text style={styles.value}>
                   {referralData.candidateFirstName}{" "}
                   {referralData.candidateLastName}
                 </Text>
-              </Text>
+              </View>
+
               <View
                 style={[
                   styles.statusBadge,
@@ -170,17 +249,107 @@ const ReferralDetail = () => {
                 </Text>
               </View>
             </View>
-
-            <Text style={styles.label}>
-              И-мэйл:
-              <Text style={styles.value}>{referralData.candidateEmail}</Text>
-            </Text>
-            <Text style={styles.label}>
-              Ажил эрхлэлтийн байдал:
+            {/* <View style={styles.infoStyle}>
+              <Text style={styles.label}>Утас:</Text>
               <Text style={styles.value}>
-                {CandidateStatusLabels[referralData.candidateCurrentStatus]}
+                {referralData.candidateTelNumber}
               </Text>
-            </Text>
+            </View> */}
+
+            <Pressable
+              onPress={() => {
+                if (referralData.candidateTelNumber) {
+                  const cleanNumber = referralData.candidateTelNumber.replace(
+                    /\s/g,
+                    "",
+                  );
+                  Linking.openURL(`tel:${cleanNumber}`);
+                }
+              }}
+              style={({ pressed }) => [
+                styles.infoStyle,
+                { opacity: pressed ? 0.5 : 1 },
+              ]}
+            >
+              <Text style={styles.label}>Утас:</Text>
+              <View style={{ flex: 1 }}>
+                <Text
+                  style={[
+                    styles.value,
+                    { color: "#0077b5", textDecorationLine: "underline" },
+                  ]}
+                >
+                  {referralData.candidateTelNumber || "Дугаар байхгүй"}
+                </Text>
+              </View>
+            </Pressable>
+
+            <Pressable
+              onPress={() => {
+                if (referralData.candidateEmail) {
+                  Linking.openURL(`mailto:${referralData.candidateEmail}`);
+                }
+              }}
+              style={({ pressed }) => [
+                styles.infoStyle,
+                { opacity: pressed ? 0.5 : 1 },
+              ]}
+            >
+              <Text style={styles.label}>И-мэйл:</Text>
+              <View style={{ flex: 1 }}>
+                <Text
+                  style={[
+                    styles.value,
+                    { color: "#0077b5", textDecorationLine: "underline" },
+                  ]}
+                >
+                  {referralData.candidateEmail}
+                </Text>
+              </View>
+            </Pressable>
+
+            {referralData.candidateLinkedinUrl && (
+              <Pressable
+                onPress={() =>
+                  Linking.openURL(referralData.candidateLinkedinUrl!)
+                }
+                style={styles.infoStyle}
+              >
+                <Text style={styles.label}>LinkedIn:</Text>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={[
+                      styles.value,
+                      { color: "#0077b5", textDecorationLine: "underline" },
+                    ]}
+                  >
+                    {referralData.candidateLinkedinUrl}
+                  </Text>
+                </View>
+              </Pressable>
+            )}
+
+            <View>
+              <Text style={styles.label}>Ажил эрхлэлтийн байдал:</Text>
+              <View style={{ flex: 1, marginTop: 5 }}>
+                <Text style={styles.value}>
+                  {CandidateStatusLabels[referralData.candidateCurrentStatus]}
+                </Text>
+              </View>
+            </View>
+
+            <View>
+              <Text style={styles.label}>Сонирхсон чиглэл:</Text>
+              <View style={{ flex: 1, marginTop: 5 }}>
+                {referralData.candidateFieldOfInterest ? (
+                  <Text style={styles.value}>
+                    {referralData.candidateFieldOfInterest}
+                  </Text>
+                ) : (
+                  <Text>•••</Text>
+                )}
+              </View>
+            </View>
           </View>
 
           <View style={styles.divider} />
@@ -193,6 +362,12 @@ const ReferralDetail = () => {
               <Text style={styles.resumeText}>Анкет үзэх (PDF)</Text>
             </Pressable>
           )}
+          <View style={{ marginTop: 20 }}>
+            <View style={styles.infoStyle}>
+              <Text style={styles.label}>Илгээсэн огноо:</Text>
+              <Text style={styles.value}>{referralData.createdAt}</Text>
+            </View>
+          </View>
         </View>
       </ScrollView>
 
@@ -247,9 +422,15 @@ const styles = StyleSheet.create({
   },
   statusBadge: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: 8 },
   infoList: { gap: 10 },
+  infoStyle: { flexDirection: "row", gap: 8, alignItems: "center" },
   label: { fontSize: 14, color: "#737373", lineHeight: 20 },
   value: { color: "#1a1a1a", fontWeight: "500" },
-  divider: { height: 1, backgroundColor: "#F2F0EF", marginVertical: 12 },
+  divider: {
+    height: 2,
+    backgroundColor: "#F2F0EF",
+    marginVertical: 12,
+    borderRadius: 10,
+  },
   resumeButton: {
     paddingVertical: 12,
     borderRadius: 8,
