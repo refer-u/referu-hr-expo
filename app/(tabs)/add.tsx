@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -22,19 +23,22 @@ export default function AddJobPage() {
   });
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
-      <View style={styles.back}>
-        <Form formData={formData} setFormData={setFormData} />
-        <Bottom formData={formData} />
-      </View>
-    </SafeAreaView>
+    <>
+      <StatusBar style="dark" />
+      <SafeAreaView style={styles.container} edges={["top"]}>
+        <View style={styles.back}>
+          <Form formData={formData} setFormData={setFormData} />
+          <Bottom formData={formData} />
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000000ff",
+    backgroundColor: "#F9FAFB",
   },
   back: {
     backgroundColor: "#F9FAFB",

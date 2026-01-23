@@ -1,8 +1,8 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-
 import { Fonts } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme.web";
+import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import ReferralsJobCards from "../_components/ReferralsJobCards";
 import ResolvedJobCards from "../_components/ResolvedJobCards";
 
@@ -13,74 +13,83 @@ export default function TabThreeScreen() {
   const scheme = useColorScheme();
 
   return (
-    <View
-      style={{
-        // backgroundColor: "#ffffff",
-        paddingHorizontal: 25,
-        paddingVertical: 70,
-        height: "100%",
-        backgroundColor: scheme === "dark" ? "#191a1bff" : "#ffffffff",
-      }}
-    >
-      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-        <View
-          style={{
-            flexDirection: "column",
-            gap: 25,
-          }}
-        >
-          <Pressable style={styles.titleContainer}>
-            <Text
-              style={{
-                fontFamily: Fonts.sans,
-                fontSize: 18,
-                fontWeight: 600,
-              }}
-            >
-              Миний цонх
-            </Text>
-          </Pressable>
-          <View style={styles.container}>
-            <Pressable
-              style={[styles.tab, activeTab === "incoming" && styles.activeTab]}
-              onPress={() => setActiveTab("incoming")}
-            >
+    <>
+      <StatusBar style="dark" />
+      <View
+        style={{
+          backgroundColor: "#ffffff",
+          paddingHorizontal: 25,
+          paddingVertical: 70,
+          height: "100%",
+          // backgroundColor: scheme === "dark" ? "#191a1bff" : "#ffffffff",
+        }}
+      >
+        <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+          <View
+            style={{
+              flexDirection: "column",
+              gap: 25,
+            }}
+          >
+            <Pressable style={styles.titleContainer}>
               <Text
-                style={[
-                  styles.tabText,
-                  activeTab === "incoming" && styles.activeTabText,
-                ]}
+                style={{
+                  fontFamily: Fonts.sans,
+                  fontSize: 18,
+                  fontWeight: 600,
+                }}
               >
-                Ирсэн саналууд
+                Миний цонх
               </Text>
             </Pressable>
+            <View style={styles.container}>
+              <Pressable
+                style={[
+                  styles.tab,
+                  activeTab === "incoming" && styles.activeTab,
+                ]}
+                onPress={() => setActiveTab("incoming")}
+              >
+                <Text
+                  style={[
+                    styles.tabText,
+                    activeTab === "incoming" && styles.activeTabText,
+                  ]}
+                >
+                  Ирсэн саналууд
+                </Text>
+              </Pressable>
 
-            <Pressable
-              style={[styles.tab, activeTab === "resolved" && styles.activeTab]}
-              onPress={() => setActiveTab("resolved")}
-            >
-              <Text
+              <Pressable
                 style={[
-                  styles.tabText,
-                  activeTab === "resolved" && styles.activeTabText,
+                  styles.tab,
+                  activeTab === "resolved" && styles.activeTab,
                 ]}
+                onPress={() => setActiveTab("resolved")}
               >
-                Шийдвэрлэгдсэн
-              </Text>
-            </Pressable>
+                <Text
+                  style={[
+                    styles.tabText,
+                    activeTab === "resolved" && styles.activeTabText,
+                  ]}
+                >
+                  Шийдвэрлэгдсэн
+                </Text>
+              </Pressable>
+            </View>
+            {activeTab === "incoming" ? (
+              <View>
+                <ReferralsJobCards />
+              </View>
+            ) : (
+              <View>
+                <ResolvedJobCards />
+              </View>
+            )}
           </View>
-          {activeTab === "incoming" ? (
-            <View>
-              <ReferralsJobCards />
-            </View>
-          ) : (
-            <View>
-              <ResolvedJobCards />
-            </View>
-          )}
-        </View>
-      </ScrollView>
-    </View>
+        </ScrollView>
+      </View>
+    </>
   );
 }
 
