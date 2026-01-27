@@ -27,19 +27,15 @@ export default function Page() {
         await setActive({ session: signInAttempt.createdSessionId });
         router.replace("/");
       } else {
-        // If the status isn't complete, check why. User might need to
-        // complete further steps.
         console.error(JSON.stringify(signInAttempt, null, 2));
       }
     } catch (err) {
-      // See Clerk docs: custom flows error handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2));
     }
   };
 
   return (
-    <View>
+    <View style={{ justifyContent: "center", alignItems: "center" }}>
       <Text>Sign in</Text>
       <TextInput
         autoCapitalize="none"
