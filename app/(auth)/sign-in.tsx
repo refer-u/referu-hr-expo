@@ -2,6 +2,7 @@ import { useSignIn } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
 import React from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { OAuthButton } from "../_components/OAuthButton";
 
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -27,19 +28,21 @@ export default function Page() {
         await setActive({ session: signInAttempt.createdSessionId });
         router.replace("/");
       } else {
-        // If the status isn't complete, check why. User might need to
-        // complete further steps.
         console.error(JSON.stringify(signInAttempt, null, 2));
       }
     } catch (err) {
-      // See Clerk docs: custom flows error handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2));
     }
   };
 
   return (
-    <View>
+    <View
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+      }}
+    >
       <Text>Sign in</Text>
       <TextInput
         autoCapitalize="none"
@@ -61,6 +64,7 @@ export default function Page() {
           <Text>Sign up</Text>
         </Link>
       </View>
+      <OAuthButton />
     </View>
   );
 }
