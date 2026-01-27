@@ -17,7 +17,6 @@ export default function HomeScreen() {
       <SafeAreaView edges={["top"]} style={styles.safeArea}>
         <View style={styles.container}>
           <Header />
-
           <Jobs />
           <SignOutButton />
         </View>
