@@ -2,6 +2,7 @@ import { useSignIn } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
 import React from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { OAuthButton } from "../_components/OAuthButton";
 
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -35,7 +36,13 @@ export default function Page() {
   };
 
   return (
-    <View style={{ justifyContent: "center", alignItems: "center" }}>
+    <View
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+      }}
+    >
       <Text>Sign in</Text>
       <TextInput
         autoCapitalize="none"
@@ -57,6 +64,7 @@ export default function Page() {
           <Text>Sign up</Text>
         </Link>
       </View>
+      <OAuthButton />
     </View>
   );
 }

@@ -2,6 +2,7 @@ import { useSignUp } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
 import * as React from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { OAuthButton } from "../_components/OAuthButton";
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -80,7 +81,13 @@ export default function SignUpScreen() {
   }
 
   return (
-    <View>
+    <View
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+      }}
+    >
       <>
         <Text>Sign up</Text>
         <TextInput
@@ -104,6 +111,7 @@ export default function SignUpScreen() {
             <Text>Sign in</Text>
           </Link>
         </View>
+        <OAuthButton />
       </>
     </View>
   );

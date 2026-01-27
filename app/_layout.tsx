@@ -13,7 +13,6 @@ import { useColorScheme } from "@/hooks/use-color-scheme";
 import { ClerkProvider } from "@clerk/clerk-expo";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
 if (!publishableKey) {
   throw new Error("Missing Publishable key.");
 }
