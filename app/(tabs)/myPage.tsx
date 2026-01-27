@@ -1,9 +1,11 @@
+import ParallaxScrollView from "@/components/parallax-scroll-view";
 import { Fonts } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme.web";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import ReferralsJobCards from "../_components/ReferralsJobCards";
+import { ReferUHeader } from "../_components/ReferUHeader";
 import ResolvedJobCards from "../_components/ResolvedJobCards";
 
 export default function TabThreeScreen() {
@@ -13,7 +15,10 @@ export default function TabThreeScreen() {
   const scheme = useColorScheme();
 
   return (
-    <>
+    <ParallaxScrollView
+      headerBackgroundColor={{ light: "#005295", dark: "#1D3D47" }}
+      headerImage={<ReferUHeader />}
+    >
       <StatusBar style="dark" />
       <View
         style={{
@@ -89,7 +94,7 @@ export default function TabThreeScreen() {
           </View>
         </ScrollView>
       </View>
-    </>
+    </ParallaxScrollView>
   );
 }
 
