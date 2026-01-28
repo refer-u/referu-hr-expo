@@ -50,7 +50,17 @@ const ReferralDetail = () => {
       [
         { text: "Цуцлах", style: "cancel" },
         {
-          text: "Ажилд авах",
+          text: "Туршилтын хугацаа",
+          onPress: () => {
+            setTimeout(() => {
+              setStatus("APPROVED");
+              router.back();
+            }, 300);
+          },
+          style: "default",
+        },
+        {
+          text: "Бүтэн цагаар",
           onPress: () => {
             setTimeout(() => {
               setStatus("APPROVED");
