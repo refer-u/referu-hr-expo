@@ -5,7 +5,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../_components/home/Header";
 import Jobs from "../_components/home/Jobs";
 import { ReferUHeader } from "../_components/ReferUHeader";
-import { SignOutButton } from "../_components/SignOutButton";
 
 export default function HomeScreen() {
   return (
@@ -18,7 +17,7 @@ export default function HomeScreen() {
         <View style={styles.container}>
           <Header />
           <Jobs />
-          <SignOutButton />
+          {/* <SignOutButton /> */}
         </View>
       </SafeAreaView>
     </ParallaxScrollView>
