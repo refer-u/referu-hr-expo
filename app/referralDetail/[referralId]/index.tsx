@@ -87,7 +87,7 @@ const ReferralDetail = () => {
     <View
       style={[
         styles.mainContainer,
-        { backgroundColor: scheme === "dark" ? "#191a1bff" : "#f8f9fa" },
+        { backgroundColor: scheme === "dark" ? "#191a1bff" : "#f0f6ff" },
       ]}
     >
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>

@@ -28,7 +28,12 @@ export default function ReferralsJobCards() {
   return (
     <View>
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-        <View style={{ flexDirection: "column", gap: 10 }}>
+        <View
+          style={{
+            flexDirection: "column",
+            gap: 10,
+          }}
+        >
           {referralJobs.map((job) => (
             <View key={job._id}>
               <Pressable onPress={() => handleReferrals(job._id)}>

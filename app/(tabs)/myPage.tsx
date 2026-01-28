@@ -22,10 +22,12 @@ export default function TabThreeScreen() {
       <StatusBar style="dark" />
       <View
         style={{
-          backgroundColor: "#ffffff",
+          backgroundColor: "#f0f6ff",
           paddingHorizontal: 25,
-          paddingVertical: 70,
-          height: "100%",
+          paddingVertical: 20,
+          paddingBottom: 150,
+          // height: "100%",
+          flex: 1,
           // backgroundColor: scheme === "dark" ? "#191a1bff" : "#ffffffff",
         }}
       >
@@ -109,9 +111,15 @@ const styles = StyleSheet.create({
     marginBottom: 7,
     justifyContent: "space-between",
     gap: 2,
-    backgroundColor: "#F2F0EF",
+    backgroundColor: "#edebeaff",
     borderRadius: 12,
     paddingVertical: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+
+    elevation: 3,
     paddingHorizontal: 3,
   },
   tab: {

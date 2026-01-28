@@ -31,9 +31,10 @@ const Index = () => {
   return (
     <View
       style={{
-        backgroundColor: scheme === "dark" ? "#191a1bff" : "#ffffffff",
+        backgroundColor: scheme === "dark" ? "#191a1bff" : "#f0f6ff",
         height: "100%",
         padding: 28,
+        //  backgroundColor: "#f0f6ff",
       }}
     >
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
