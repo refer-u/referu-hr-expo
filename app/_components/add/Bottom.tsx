@@ -87,7 +87,9 @@ const styles = StyleSheet.create({
   },
 
   primary: {
-    backgroundColor: "#6c6e73ff",
+    // backgroundColor: "#6c6e73ff",
+
+    backgroundColor: "#0a7ea4",
   },
 
   primaryText: {

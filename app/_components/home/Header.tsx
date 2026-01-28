@@ -1,11 +1,15 @@
+import { JobListIconAnime } from "@/components/job-list-anime";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
 import { mockJobs } from "@/lib/mock";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 export default function Header() {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    // <View style={styles.container}>
+    <View>
+      {/* <View style={styles.header}>
         <Text style={styles.subtitle}>Ажилтны санал · Employee Referral</Text>
         <Text style={styles.title}>Ажлын санал</Text>
       </View>
@@ -15,7 +19,34 @@ export default function Header() {
           {mockJobs.length}
           <Text style={styles.countLabel}> нээлттэй ажлын байр</Text>
         </Text>
-      </View>
+      </View> */}
+      <ThemedView
+        style={{
+          backgroundColor: "#f0f6ff",
+          paddingVertical: 30,
+          paddingHorizontal: 26,
+        }}
+      >
+        <ThemedView
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 10,
+            backgroundColor: "#f0f6ff",
+            // paddingBottom: 32,
+          }}
+        >
+          <JobListIconAnime />
+          <ThemedView style={{ backgroundColor: "#f0f6ff" }}>
+            <ThemedText type="title" style={{ fontSize: 26 }}>
+              Ажлын зар
+            </ThemedText>
+            <ThemedText style={{ color: "#687076" }}>
+              {mockJobs.length} Нээлттэй ажлын байр
+            </ThemedText>
+          </ThemedView>
+        </ThemedView>
+      </ThemedView>
     </View>
   );
 }

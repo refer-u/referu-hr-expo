@@ -1,7 +1,6 @@
 import { useSSO } from "@clerk/clerk-expo";
 import * as Linking from "expo-linking";
 import * as WebBrowser from "expo-web-browser";
-import { Globe } from "lucide-react-native"; // You can use 'Chrome' or 'Globe' as a placeholder
 import { useCallback } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
@@ -30,7 +29,7 @@ export function OAuthButton() {
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.button}>
-      <Globe color="black" size={20} style={{ marginRight: 10 }} />
+      {/* <Globe color="black" size={20} style={{ marginRight: 10 }} /> */}
       <Text style={styles.text}>Continue with Google</Text>
     </TouchableOpacity>
   );
@@ -40,13 +39,13 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#fff",
     flexDirection: "row",
-    padding: 16,
+    padding: 12,
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
     borderColor: "#e2e8f0",
-    marginTop: 20,
+    // marginTop: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "600",
     color: "#1a202c",
   },

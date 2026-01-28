@@ -86,33 +86,119 @@ export default function SignUpScreen() {
         justifyContent: "center",
         alignItems: "center",
         height: "100%",
+        width: "100%",
+        backgroundColor: "#f0f6ff",
       }}
     >
-      <>
-        <Text>Sign up</Text>
-        <TextInput
-          autoCapitalize="none"
-          value={emailAddress}
-          placeholder="Enter email"
-          onChangeText={(email) => setEmailAddress(email)}
-        />
-        <TextInput
-          value={password}
-          placeholder="Enter password"
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        />
-        <TouchableOpacity onPress={onSignUpPress}>
-          <Text>Continue</Text>
-        </TouchableOpacity>
-        <View style={{ display: "flex", flexDirection: "row", gap: 3 }}>
+      <View
+        style={{
+          backgroundColor: "#ffffff",
+          borderRadius: 28,
+          // padding: 28,
+          boxSizing: "border-box",
+          paddingVertical: 32,
+          paddingHorizontal: 28,
+          flexDirection: "column",
+          gap: 36,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.2,
+          shadowRadius: 8,
+          elevation: 2,
+        }}
+      >
+        <Text style={{ color: "black", fontWeight: "700", fontSize: 28 }}>
+          Sign up
+        </Text>
+        <View style={{ flexDirection: "column", gap: 16 }}>
+          <View style={{ flexDirection: "column", gap: 8 }}>
+            <Text style={{ fontWeight: "600" }}>Email</Text>
+            <TextInput
+              autoCapitalize="none"
+              value={emailAddress}
+              placeholder="Enter email"
+              onChangeText={(email) => setEmailAddress(email)}
+              style={{
+                borderBottomWidth: 1,
+                borderColor: "#737373",
+                paddingHorizontal: 2,
+                paddingVertical: 4,
+              }}
+            />
+          </View>
+          <View style={{ flexDirection: "column", gap: 8 }}>
+            <Text style={{ fontWeight: "600" }}>Password</Text>
+            <TextInput
+              value={password}
+              placeholder="Enter password"
+              secureTextEntry={true}
+              onChangeText={(password) => setPassword(password)}
+              style={{
+                borderBottomWidth: 1,
+                borderColor: "#737373",
+                paddingHorizontal: 2,
+                paddingVertical: 4,
+              }}
+            />
+          </View>
+          {/* </View> */}
+          <TouchableOpacity
+            onPress={onSignUpPress}
+            style={{
+              width: "100%",
+              backgroundColor: "#0a7ea4",
+              borderRadius: 12,
+              padding: 12,
+              flexDirection: "row",
+              justifyContent: "center",
+              marginTop: 24,
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.3,
+              shadowRadius: 2,
+              elevation: 2,
+            }}
+          >
+            <Text style={{ color: "#ffffff", fontWeight: "600", fontSize: 16 }}>
+              Sign Up
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: 3,
+            justifyContent: "center",
+          }}
+        >
           <Text>Already have an account?</Text>
           <Link href="/sign-in">
-            <Text>Sign in</Text>
+            <Text style={{ color: "#0a7ea4", fontWeight: "700" }}>Sign in</Text>
           </Link>
         </View>
+        <View
+          style={{ flexDirection: "row", justifyContent: "center", gap: 4 }}
+        >
+          <View
+            style={{
+              borderBottomWidth: 1,
+              width: 80,
+              borderBottomColor: "#737373",
+            }}
+          />
+          <Text>OR</Text>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              width: 80,
+              borderBottomColor: "#737373",
+            }}
+          />
+        </View>
         <OAuthButton />
-      </>
+      </View>
     </View>
   );
 }
