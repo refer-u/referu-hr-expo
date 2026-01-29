@@ -11,7 +11,7 @@ export default function HomeScreen() {
       headerBackgroundColor={{ light: "#005295", dark: "#1D3D47" }}
       headerImage={<ReferUHeader />}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       {/* <SafeAreaView edges={["top"]} style={styles.safeArea}> */}
       <View style={styles.container}>
         <Header />
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f0f6ff",
-    paddingBottom: 150,
+    paddingBottom: 0,
 
     //  backgroundColor: "#F9FAFB",
   },
