@@ -1,59 +1,124 @@
-import { mockJobs } from "@/lib/mock";
-import { useRouter } from "expo-router";
-import React from "react";
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import * as WebBrowser from "expo-web-browser";
+import React, { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+
+const API_URL = "http://192.168.1.47:4000/api/worki/jobs";
+
+type Job = {
+  id: string;
+  title: string;
+  department: string;
+  salary: string;
+  link: string;
+};
 
 export default function Jobs() {
-  const router = useRouter();
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const renderItem = ({ item }: any) => (
-    <Pressable
-      style={styles.card}
-      onPress={() =>
-        router.navigate({
-          pathname: "/job/[id]",
-          params: { id: item.id },
-        })
-      }
-    >
-      <View style={styles.rowBetween}>
-        <Text style={styles.title}>{item.title}</Text>
+  // 🔒 URL-г 100% browser нээгдэх хэлбэрт оруулна
+  const normalizeUrl = (url?: string) => {
+    if (!url) return "";
 
-        {item.referralCount > 0 && (
-          <View style={styles.badge}>
-            <Text style={styles.badgeText}>{item.referralCount}</Text>
-          </View>
-        )}
-      </View>
+    if (url.startsWith("http://") || url.startsWith("https://")) {
+      return url;
+    }
 
+    if (url.startsWith("/")) {
+      return `https://worki.mn${url}`;
+    }
+
+    return `https://worki.mn/${url}`;
+  };
+
+  useEffect(() => {
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((json) => {
+        const mapped: Job[] = (json.data || [])
+          .map((item: any, index: number) => ({
+            id: String(index),
+            title: item.title ?? "",
+            department: item.company ?? "",
+            salary: item.salary ?? "",
+            link: normalizeUrl(item.link),
+          }))
+          // 🔥 link байхгүй card-уудыг бүр мөсөн хаяна
+          .filter((j: any) => j.title);
+
+        console.log("JOBS:", mapped);
+        setJobs(mapped);
+      })
+      .catch((e) => {
+        console.log(e);
+        Alert.alert("API error", "Job data татаж чадсангүй");
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  const openWorki = async (url: string) => {
+    if (!url) return;
+
+    console.log("OPENING:", url);
+
+    await WebBrowser.openBrowserAsync(url, {
+      presentationStyle: WebBrowser.WebBrowserPresentationStyle.FULL_SCREEN,
+      controlsColor: "#2563EB",
+    });
+  };
+
+  const renderItem = ({ item }: { item: Job }) => (
+    <View style={styles.card}>
+      <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.department}>{item.department}</Text>
 
       <View style={styles.rowBetween}>
-        <Text style={styles.salary}>
-          ₮{item.salaryMin.toLocaleString()} - ₮
-          {item.salaryMax.toLocaleString()}
-        </Text>
-        <Text style={styles.date}>{item.postedDate}</Text>
+        <Text style={styles.salary}>{item.salary}</Text>
+
+        <TouchableOpacity onPress={() => openWorki(item.link)}>
+          <Text style={styles.viewBtn}>Үзэх</Text>
+        </TouchableOpacity>
       </View>
-    </Pressable>
+    </View>
   );
+
+  if (loading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <FlatList
-      data={mockJobs}
+      data={jobs}
       keyExtractor={(item) => item.id}
       renderItem={renderItem}
       contentContainerStyle={styles.list}
+      scrollEnabled={false}
     />
   );
 }
 
 const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   list: {
     padding: 16,
-    paddingBottom: 100,
+    paddingBottom: 120,
   },
-
   card: {
     backgroundColor: "#fff",
     borderRadius: 12,
@@ -64,49 +129,29 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 2,
   },
-
-  rowBetween: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap: 8,
-  },
-
   title: {
     fontSize: 16,
     fontWeight: "600",
     color: "#111827",
-    flex: 1,
   },
-
-  badge: {
-    backgroundColor: "#E5E7EB",
-    borderRadius: 999,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-  },
-
-  badgeText: {
-    fontSize: 12,
-    fontWeight: "600",
-    color: "#111827",
-  },
-
   department: {
     fontSize: 14,
     color: "#6B7280",
     marginVertical: 4,
   },
-
+  rowBetween: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   salary: {
     fontSize: 14,
     fontWeight: "600",
     color: "#2563EB",
-    // color: "#0a6786ff",
   },
-
-  date: {
+  viewBtn: {
     fontSize: 12,
-    color: "#6B7280",
+    fontWeight: "600",
+    color: "#2563EB",
   },
 });
