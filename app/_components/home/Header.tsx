@@ -38,7 +38,7 @@ export default function Header() {
         >
           <JobListIconAnime />
           <ThemedView style={{ backgroundColor: "#f0f6ff" }}>
-            <ThemedText type="title" style={{ fontSize: 26 }}>
+            <ThemedText type="title" style={{ fontSize: 26, color: "#005295" }}>
               Ажлын зар
             </ThemedText>
             <ThemedText style={{ color: "#687076" }}>

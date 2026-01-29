@@ -1,102 +1,102 @@
-import * as WebBrowser from "expo-web-browser";
+import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
-  ActivityIndicator,
-  Alert,
   FlatList,
+  Linking,
+  Pressable,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
 
-const API_URL = "http://192.168.1.47:4000/api/worki/jobs";
+const API_URL = "http://192.168.1.224:4000/api/worki/jobs";
 
 type Job = {
   id: string;
   title: string;
   department: string;
-  salary: string;
+  salaryMin: number;
+  salaryMax: number;
+  postedDate: string;
+  referralCount: number;
+  type: string;
   link: string;
 };
 
 export default function Jobs() {
+  const router = useRouter();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // 🔒 URL-г 100% browser нээгдэх хэлбэрт оруулна
-  const normalizeUrl = (url?: string) => {
-    if (!url) return "";
-
-    if (url.startsWith("http://") || url.startsWith("https://")) {
-      return url;
-    }
-
-    if (url.startsWith("/")) {
-      return `https://worki.mn${url}`;
-    }
-
-    return `https://worki.mn/${url}`;
-  };
 
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
       .then((json) => {
-        const mapped: Job[] = (json.data || [])
-          .map((item: any, index: number) => ({
-            id: String(index),
-            title: item.title ?? "",
-            department: item.company ?? "",
-            salary: item.salary ?? "",
-            link: normalizeUrl(item.link),
-          }))
-          // 🔥 link байхгүй card-уудыг бүр мөсөн хаяна
-          .filter((j: any) => j.title);
+        const mapped: Job[] = (json.data || []).map(
+          (item: any, index: number) => {
+            const nums = item.salary?.replace(/[^\d\-]/g, "").split("-") ?? [];
+            const min = Number(nums[0]) || 0;
+            const max = Number(nums[1]) || min;
 
-        console.log("JOBS:", mapped);
+            return {
+              id: String(index),
+              title: item.title,
+              department: item.company,
+              salaryMin: min,
+              salaryMax: max,
+              postedDate: "Шинэ",
+              referralCount: 0,
+              type: item.type || "Full-time",
+              link: item.link,
+            };
+          },
+        );
+
         setJobs(mapped);
       })
-      .catch((e) => {
-        console.log(e);
-        Alert.alert("API error", "Job data татаж чадсангүй");
-      })
+
+      .catch(console.log)
       .finally(() => setLoading(false));
   }, []);
 
-  const openWorki = async (url: string) => {
-    if (!url) return;
-
-    console.log("OPENING:", url);
-
-    await WebBrowser.openBrowserAsync(url, {
-      presentationStyle: WebBrowser.WebBrowserPresentationStyle.FULL_SCREEN,
-      controlsColor: "#2563EB",
-    });
-  };
-
   const renderItem = ({ item }: { item: Job }) => (
-    <View style={styles.card}>
+    <Pressable
+      style={styles.card}
+      onPress={() =>
+        router.navigate({
+          pathname: "/job/[id]",
+          params: { id: item.id },
+        })
+      }
+    >
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.department}>{item.department}</Text>
 
-      <View style={styles.rowBetween}>
-        <Text style={styles.salary}>{item.salary}</Text>
+      <Text style={styles.salary}>
+        ₮{item.salaryMin.toLocaleString()} – ₮{item.salaryMax.toLocaleString()}
+      </Text>
 
-        <TouchableOpacity onPress={() => openWorki(item.link)}>
-          <Text style={styles.viewBtn}>Үзэх</Text>
+      <View style={styles.footer}>
+        <View style={styles.typeRow}>
+          <View style={styles.typeChip}>
+            <Text style={styles.typeText}>{item.type}</Text>
+          </View>
+        </View>
+
+        <TouchableOpacity
+          onPress={() => {
+            console.log("Opening link:", item.link);
+            if (item.link?.startsWith("http")) {
+              Linking.openURL(item.link);
+            }
+          }}
+        >
+          <Text style={styles.viewBtn}>Зар үзэх</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </Pressable>
   );
-
-  if (loading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
 
   return (
     <FlatList
@@ -105,6 +105,7 @@ export default function Jobs() {
       renderItem={renderItem}
       contentContainerStyle={styles.list}
       scrollEnabled={false}
+      nestedScrollEnabled={false}
     />
   );
 }
@@ -115,43 +116,70 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   list: {
     padding: 16,
-    paddingBottom: 120,
+    paddingBottom: 24,
   },
+
   card: {
     backgroundColor: "#fff",
-    borderRadius: 12,
+    borderRadius: 14,
     padding: 16,
-    marginBottom: 12,
+    marginBottom: 14,
     shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
+    elevation: 3,
   },
+
+  department: {
+    fontSize: 13,
+    color: "#6B7280",
+    marginBottom: 4,
+  },
+
   title: {
     fontSize: 16,
     fontWeight: "600",
     color: "#111827",
+    marginBottom: 6,
   },
-  department: {
-    fontSize: 14,
-    color: "#6B7280",
-    marginVertical: 4,
+
+  salary: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: "#4F46E5",
+    marginBottom: 12,
   },
-  rowBetween: {
+
+  footer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  salary: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: "#2563EB",
+
+  typeRow: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  viewBtn: {
+
+  typeChip: {
+    backgroundColor: "#EEF2FF",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 999,
+  },
+
+  typeText: {
     fontSize: 12,
+    fontWeight: "500",
+    color: "#4F46E5",
+  },
+
+  viewBtn: {
+    fontSize: 13,
     fontWeight: "600",
-    color: "#2563EB",
+    color: "#4F46E5",
   },
 });
