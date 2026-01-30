@@ -571,7 +571,7 @@ const ReferralDetail = () => {
           onPress: async () => {
             try {
               await axios.patch(
-                `http://192.168.10.210:4000/hr/referral/${referralId}/bonus100`,
+                `http://192.168.10.75:4000/hr/referral/${referralId}/bonus100`,
               );
               setStatus("BONUS100");
               setTimeout(() => router.back(), 300);
@@ -585,7 +585,7 @@ const ReferralDetail = () => {
           onPress: async () => {
             try {
               await axios.patch(
-                `http://192.168.10.210:4000/hr/referral/${referralId}/bonus200`,
+                `http://192.168.10.75:4000/hr/referral/${referralId}/bonus200`,
               );
               setStatus("BONUS200");
               setTimeout(() => router.back(), 300);
@@ -610,7 +610,7 @@ const ReferralDetail = () => {
           onPress: async () => {
             try {
               await axios.patch(
-                `http://192.168.10.210:4000/hr/referral/${referralId}/rejected`,
+                `http://192.168.10.75:4000/hr/referral/${referralId}/rejected`,
               );
               setStatus("REJECTED");
               setTimeout(() => router.back(), 300);

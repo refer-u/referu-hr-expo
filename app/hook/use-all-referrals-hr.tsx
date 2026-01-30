@@ -66,7 +66,7 @@ export const useAllReferrals = () => {
         const token = await getToken();
 
         setLoading(true);
-        const res = await axios.get("http://192.168.10.210:4000/hr/referral", {
+        const res = await axios.get("http://192.168.10.75:4000/hr/referral", {
           headers: { Authorization: `Bearer ${token}` },
         });
 

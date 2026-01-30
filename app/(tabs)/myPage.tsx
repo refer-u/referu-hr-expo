@@ -26,8 +26,8 @@ export default function TabThreeScreen() {
           paddingHorizontal: 25,
           paddingVertical: 20,
           paddingBottom: 150,
-          // height: "100%",
-          flex: 1,
+          height: "100%",
+          // flex: 1,
           // backgroundColor: scheme === "dark" ? "#191a1bff" : "#ffffffff",
         }}
       >
