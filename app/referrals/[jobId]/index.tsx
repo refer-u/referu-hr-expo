@@ -200,6 +200,7 @@ import {
   ReferralStatusColors,
   ReferralStatusLabels,
 } from "@/lib/mockData";
+import { formatDate } from "@/lib/utils/format-date";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
@@ -323,7 +324,7 @@ const Index = () => {
                     )}
 
                     <Text style={styles.departmentTitle}>
-                      Огноо: {referral.createdAt}
+                      Огноо: {formatDate(referral.createdAt)}
                     </Text>
                   </View>
                 </Pressable>

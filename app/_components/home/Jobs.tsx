@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 
-const API_URL = "http://192.168.1.224:4000/api/worki/jobs";
+const API_URL = "http://192.168.10.65:4000/api/scrape/worki";
 
 type Job = {
   id: string;
@@ -63,15 +63,15 @@ export default function Jobs() {
   const renderItem = ({ item }: { item: Job }) => (
     <Pressable
       style={styles.card}
-      onPress={() =>
-        router.navigate({
-          pathname: "/job/[id]",
-          params: { id: item.id },
-        })
-      }
+      // onPress={() =>
+      //   router.navigate({
+      //     pathname: "/job/[id]",
+      //     params: { id: item.id },
+      //   })
+      // }
     >
       <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.department}>{item.department}</Text>
+      {/* <Text style={styles.department}>{item.department}</Text> */}
 
       <Text style={styles.salary}>
         ₮{item.salaryMin.toLocaleString()} – ₮{item.salaryMax.toLocaleString()}

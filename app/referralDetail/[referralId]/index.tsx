@@ -509,8 +509,10 @@ import {
   ReferralStatusLabels,
   RelationLabels,
 } from "@/lib/mockData";
+import { formatDate } from "@/lib/utils/format-date";
 import axios from "axios";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { Loader } from "lucide-react-native";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   Alert,
@@ -549,7 +551,9 @@ const ReferralDetail = () => {
   if (!referralData) {
     return (
       <View style={styles.centered}>
-        <Text>Referral not found</Text>
+        <Text>
+          <Loader />
+        </Text>
       </View>
     );
   }
@@ -573,10 +577,12 @@ const ReferralDetail = () => {
               await axios.patch(
                 `http://192.168.10.75:4000/hr/referral/${referralId}/bonus100`,
               );
+              router.back();
+
               setStatus("BONUS100");
-              setTimeout(() => router.back(), 300);
+              // setTimeout(() => router.back(), 1);
             } catch {
-              Alert.alert("Алдаа", "Сервертэй холбогдож чадсангүй.");
+              console.error("");
             }
           },
         },
@@ -587,10 +593,12 @@ const ReferralDetail = () => {
               await axios.patch(
                 `http://192.168.10.75:4000/hr/referral/${referralId}/bonus200`,
               );
+              router.back();
+
               setStatus("BONUS200");
-              setTimeout(() => router.back(), 300);
+              // setTimeout(() => router.back(), 300);
             } catch {
-              Alert.alert("Алдаа", "Сервертэй холбогдож чадсангүй.");
+              console.error("");
             }
           },
         },
@@ -612,10 +620,12 @@ const ReferralDetail = () => {
               await axios.patch(
                 `http://192.168.10.75:4000/hr/referral/${referralId}/rejected`,
               );
+              router.back();
+
               setStatus("REJECTED");
-              setTimeout(() => router.back(), 300);
+              // setTimeout(() => router.back(), 300);
             } catch {
-              Alert.alert("Алдаа", "Сервертэй холбогдож чадсангүй.");
+              console.error("");
             }
           },
         },
@@ -851,7 +861,9 @@ const ReferralDetail = () => {
           <View style={{ marginTop: 20 }}>
             <View style={styles.infoStyle}>
               <Text style={styles.label}>Илгээсэн огноо:</Text>
-              <Text style={styles.value}>{referralData.createdAt}</Text>
+              <Text style={styles.value}>
+                {formatDate(referralData.createdAt)}
+              </Text>
             </View>
           </View>
         </View>

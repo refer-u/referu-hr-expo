@@ -132,6 +132,7 @@ import { ConnectionState } from './components/ConnectionState';
 import { Messages } from './components/Messages';
 
 // Import your global styles (Tailwind/NativeWind)
+import { PresenceStatus } from 'components/PresenceStatus';
 import './global.css';
 
 export default function App() {
@@ -157,13 +158,22 @@ export default function App() {
                 <ConnectionState />
               </View>
 
-              {/* Chat/Messages Section */}
+              {/* Chat/Messages Section
               <View className="bg-white">
                 <Messages />
               </View>
+            </View> */}
+              <View className="flex-column justify-evenly lg:flex-row">
+                <View className="border-blue-500 max-lg:border-b lg:w-1/4 lg:border-r">
+                  {/* Your PresenceStatus component should go here */}
+                  <PresenceStatus />
+                </View>
+                <View className="lg:w-3/4">
+                  <Messages />
+                </View>
+              </View>
+              <StatusBar style="dark" />
             </View>
-
-            <StatusBar style="dark" />
           </View>
         </SafeAreaView>
       </ChannelProvider>

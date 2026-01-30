@@ -1,7 +1,6 @@
 import { JobListIconAnime } from "@/components/job-list-anime";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { mockJobs } from "@/lib/mock";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
@@ -42,7 +41,8 @@ export default function Header() {
               Ажлын зар
             </ThemedText>
             <ThemedText style={{ color: "#687076" }}>
-              {mockJobs.length} Нээлттэй ажлын байр
+              {/* {mockJobs.length} Нээлттэй ажлын байр */}
+              10 Нээлттэй ажлын байр
             </ThemedText>
           </ThemedView>
         </ThemedView>

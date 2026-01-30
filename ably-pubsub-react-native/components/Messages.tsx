@@ -2,7 +2,7 @@
 
 import type { Message } from 'ably';
 import { useChannel } from 'ably/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 function MessageView({ message }: { message: Message }) {
@@ -20,7 +20,10 @@ export function Messages() {
   const [inputValue, setInputValue] = useState('');
 
   // useChannel hook also provides a publish method
-  const { publish } = useChannel('my-first-channel', (message) => {
+  //   const { publish } = useChannel('my-first-channel', (message) => {
+  //     setMessages((prevMessages) => [...prevMessages, message]);
+  //   });
+  const { channel, publish } = useChannel('my-first-channel', (message) => {
     setMessages((prevMessages) => [...prevMessages, message]);
   });
 
@@ -32,6 +35,23 @@ export function Messages() {
     );
     setInputValue('');
   };
+  useEffect(() => {
+    async function loadHistory() {
+      try {
+        // Retrieve the last 5 messages from history
+        const history = await channel.history({ limit: 5 });
+        // History responses are returned in reverse chronological order (newest first)
+        // Reverse the array to show the latest messages at the bottom in the UI
+        const messagesFromHistory = history.items.reverse();
+        // Update the state with retrieved messages
+        setMessages(messagesFromHistory);
+      } catch (error) {
+        console.error('Error loading message history:', error);
+      }
+    }
+
+    loadHistory();
+  }, [channel]);
 
   return (
     <View className="h-[200px] w-full rounded-lg lg:h-[400px]">

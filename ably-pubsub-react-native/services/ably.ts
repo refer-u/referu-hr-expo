@@ -28,5 +28,5 @@ if (!apiKey) {
 // Export a single instance to be used by the AblyProvider
 export const realtimeClient = new Ably.Realtime({
   key: apiKey,
-  clientId: `user-${Math.random().toString(36).substring(7)}`,
+  //   clientId: `user-${Math.random().toString(36).substring(7)}`,
 });
