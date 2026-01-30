@@ -1,27 +1,44 @@
 import { Fonts } from "@/constants/theme";
-import { mockPostedJobs, mockReferrals } from "@/lib/mockData";
+import { ReferralType } from "@/lib/type";
+import { hrPostedJobs } from "@/lib/utils/get-datas";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useAllReferrals } from "../hook/use-all-referrals-hr";
 
 export default function ResolvedJobCards() {
   const router = useRouter();
+  const { allReferralsHR } = useAllReferrals();
 
-  const resolvedJobs = mockPostedJobs
-    .map((job) => {
-      const resolvedReferrals = mockReferrals.filter(
-        (ref) =>
-          ref.postedJobId === job._id &&
-          (ref.referralStatus === "APPROVED" ||
-            ref.referralStatus === "REJECTED")
-      );
+  // const resolvedJobs = mockPostedJobs
+  //   .map((job) => {
+  //     const resolvedReferrals = mockReferrals.filter(
+  //       (ref) =>
+  //         ref.postedJobId === job._id &&
+  //         (ref.referralStatus === "APPROVED" ||
+  //           ref.referralStatus === "REJECTED")
+  //     );
 
-      return {
-        ...job,
-        referralCount: resolvedReferrals.length,
-      };
-    })
-    .filter((job) => job.referralCount > 0);
+  //     return {
+  //       ...job,
+  //       referralCount: resolvedReferrals.length,
+  //     };
+  //   })
+  //   .filter((job) => job.referralCount > 0);
+
+  const resolvedReferrals: ReferralType["referralStatus"][] = [
+    "REJECTED",
+    "BONUS100",
+    "BONUS200",
+  ];
+
+  const resolvedJobs = hrPostedJobs.filter((job) =>
+    allReferralsHR.find(
+      (referral) =>
+        referral.postedJobId === job._id &&
+        resolvedReferrals.includes(referral.referralStatus),
+    ),
+  );
 
   const handleReferrals = (jobId: string) => {
     router.push({

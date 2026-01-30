@@ -33,7 +33,11 @@ export type CandidateCurrentStatusEnum =
   | "UNEMPLOYED"
   | "OTHER";
 
-export type ReferralStatusEnum = "SUBMITTED" | "APPROVED" | "REJECTED";
+export type ReferralStatusEnum =
+  | "SUBMITTED"
+  | "BONUS100"
+  | "BONUS200"
+  | "REJECTED";
 
 // =====================================================
 // TYPES (ERD)
@@ -155,13 +159,15 @@ export const CandidateStatusLabels: Record<CandidateCurrentStatusEnum, string> =
 
 export const ReferralStatusLabels: Record<ReferralStatusEnum, string> = {
   SUBMITTED: "Шинэ",
-  APPROVED: "Зөвшөөрсөн",
+  BONUS100: "Туршилтын ажилтан",
+  BONUS200: "Бүтэн цагийн ажилтан",
   REJECTED: "Татгалзсан",
 };
 
 export const ReferralStatusColors: Record<ReferralStatusEnum, string> = {
   SUBMITTED: "#3B82F6", // Blue
-  APPROVED: "#10B981", // Green
+  BONUS100: "#10B981", // Green
+  BONUS200: "#10B981", // Green
   REJECTED: "#EF4444", // Red
 };
 
@@ -240,288 +246,5 @@ export const mockEmployees: Employee[] = [
     employeeJobLevel: "SPECIALIST",
     createdAt: "2025-09-10",
     updatedAt: "2026-01-01",
-  },
-];
-
-export const mockPostedJobs: PostedJob[] = [
-  // --- SUBMITTED (OPEN) JOBS ---
-  {
-    _id: "job_sub_1",
-    jobTitle: "Senior Software Engineer",
-    jobDepartment: "Технологийн хэлтэс",
-    jobType: "FULL_TIME",
-    jobLevel: "SENIOR_SPECIALIST",
-    salaryMin: 4500000,
-    salaryMax: 6000000,
-    keyDuties: [
-      "Backend architecture",
-      "Mentoring junior devs",
-      "API optimization",
-    ],
-    requirements: [
-      "6+ years of Node.js experience",
-      "Strong system design skills",
-    ],
-    requiredSkills: ["Node.js", "PostgreSQL", "Redis"],
-    benefits: ["Flexible hours", "Private health insurance", "Learning budget"],
-    contactInfo: "hr_tech@company.mn",
-    location: "Ulaanbaatar (Hybrid)",
-    createdAt: "2026-01-10",
-    updatedAt: "2026-01-10",
-  },
-  {
-    _id: "job_sub_2",
-    jobTitle: "Growth Marketing Manager",
-    jobDepartment: "Маркетингийн хэлтэс",
-    jobType: "FULL_TIME",
-    jobLevel: "MANAGER",
-    salaryMin: 3000000,
-    salaryMax: 4500000,
-    keyDuties: [
-      "User acquisition strategies",
-      "Funnel analysis",
-      "Ad campaign management",
-    ],
-    requirements: ["3+ years in digital marketing", "Data-driven mindset"],
-    requiredSkills: ["Google Ads", "Meta Business Suite", "SQL"],
-    benefits: ["Performance-based bonus", "Company laptop"],
-    contactInfo: "hr_marketing@company.mn",
-    location: "Ulaanbaatar",
-    createdAt: "2026-01-12",
-    updatedAt: "2026-01-12",
-  },
-  // --- RESOLVED (COMPLETED) JOBS ---
-  {
-    _id: "job_res_1",
-    jobTitle: "UI/UX Designer",
-    jobDepartment: "Дизайны алба",
-    jobType: "FULL_TIME",
-    jobLevel: "SPECIALIST",
-    salaryMin: 2500000,
-    salaryMax: 3800000,
-    keyDuties: ["Creating hi-fi prototypes", "Conducting user interviews"],
-    requirements: ["Strong Figma portfolio", "Understanding of design systems"],
-    requiredSkills: ["Figma", "Adobe CC", "Prototyping"],
-    benefits: ["Creative environment", "Gym membership"],
-    contactInfo: "hr_design@company.mn",
-    location: "Ulaanbaatar",
-    createdAt: "2025-12-01",
-    updatedAt: "2026-01-05", // Resolved date
-  },
-  {
-    _id: "job_res_2",
-    jobTitle: "Data Analyst",
-    jobDepartment: "Өгөгдлийн алба",
-    jobType: "CONTRACT",
-    jobLevel: "SPECIALIST",
-    salaryMin: 3000000,
-    salaryMax: 4000000,
-    keyDuties: ["Building BI dashboards", "Cleaning raw data"],
-    requirements: ["Proficiency in Python or R", "Excel mastery"],
-    requiredSkills: ["Tableau", "Python", "BigQuery"],
-    benefits: ["Remote work option"],
-    contactInfo: "hr_data@company.mn",
-    location: "Remote",
-    createdAt: "2025-11-20",
-    updatedAt: "2025-12-25", // Resolved date
-  },
-];
-
-// ---------------- REFERRALS ----------------
-// ---------------- REFERRALS ----------------
-export const mockReferrals: Referral[] = [
-  // --- REFERRALS FOR SUBMITTED JOB 1 (Senior SWE) ---
-  {
-    _id: "ref_101",
-    postedJobId: "job_sub_1",
-    referringEmployeeId: "emp1",
-    relationWithCandidate: "FORMER_COLLEAGUE",
-    referralReason: "Worked with him for 3 years. Exceptional troubleshooter.",
-    candidateFirstName: "Золбоо",
-    candidateLastName: "Төмөр",
-    candidateTelNumber: "8888-1010",
-    candidateEmail: "zolboo.t@gmail.com",
-    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateFieldOfInterest: "Backend Engineering",
-    candidateResume: "/resumes/zolboo-t-backend.pdf",
-    candidateLinkedinUrl: "https://www.linkedin.com/in/zolboo-tech/", // Added
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-    referralStatus: "SUBMITTED",
-    createdAt: "2026-01-15",
-    updatedAt: "2026-01-15",
-  },
-  {
-    _id: "ref_102",
-    postedJobId: "job_sub_1",
-    referringEmployeeId: "emp2",
-    relationWithCandidate: "FRIEND",
-    referralReason:
-      "Strong knowledge of distributed systems and microservices.",
-    candidateFirstName: "Ану",
-    candidateLastName: "Эрдэнэ",
-    candidateTelNumber: "8888-2020",
-    candidateEmail: "anu.erdene@outlook.com",
-    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateFieldOfInterest: "Software Architecture",
-    candidateResume: "/resumes/anu-e-architecture.pdf",
-    candidateLinkedinUrl: "https://www.linkedin.com/in/anu-erdene-arch/", // Added
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-    referralStatus: "SUBMITTED",
-    createdAt: "2026-01-16",
-    updatedAt: "2026-01-16",
-  },
-
-  // --- REFERRALS FOR SUBMITTED JOB 2 (Growth Marketing) ---
-  {
-    _id: "ref_201",
-    postedJobId: "job_sub_2",
-    referringEmployeeId: "emp4",
-    relationWithCandidate: "ALUMNI",
-    referralReason:
-      "Top of our class in Marketing, has 4 years of agency experience.",
-    candidateFirstName: "Чингүүн",
-    candidateLastName: "Болд",
-    candidateTelNumber: "8888-3030",
-    candidateEmail: "chingun.b@gmail.com",
-    candidateCurrentStatus: "UNEMPLOYED",
-    candidateFieldOfInterest: "Performance Marketing",
-    candidateResume: "/resumes/chingun-b-marketing.pdf",
-    candidateLinkedinUrl: "https://www.linkedin.com/in/chingun-marketing/", // Added
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-    referralStatus: "SUBMITTED",
-    createdAt: "2026-01-17",
-    updatedAt: "2026-01-17",
-  },
-  {
-    _id: "ref_202",
-    postedJobId: "job_sub_2",
-    referringEmployeeId: "emp1",
-    relationWithCandidate: "FRIEND",
-    referralReason: "Highly creative person with great analytical skills.",
-    candidateFirstName: "Мишээл",
-    candidateLastName: "Ганзориг",
-    candidateTelNumber: "8888-4040",
-    candidateEmail: "misheel.g@gmail.com",
-    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateFieldOfInterest: "Digital Strategy",
-    candidateResume: "/resumes/misheel-g-cv.pdf",
-    candidateLinkedinUrl: "https://www.linkedin.com/in/misheel-ganzo/", // Added
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-    referralStatus: "SUBMITTED",
-    createdAt: "2026-01-18",
-    updatedAt: "2026-01-18",
-  },
-
-  // --- REFERRALS FOR RESOLVED JOB 1 (UI/UX) ---
-  {
-    _id: "ref_301",
-    postedJobId: "job_res_1",
-    referringEmployeeId: "emp3",
-    relationWithCandidate: "FORMER_COLLEAGUE",
-    referralReason: "Her portfolio matches our design system perfectly.",
-    candidateFirstName: "Намуун",
-    candidateLastName: "Баяр",
-    candidateTelNumber: "8888-5050",
-    candidateEmail: "namuun.b@yahoo.com",
-    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateResume: "/cv/namuun_ux.pdf",
-    candidateLinkedinUrl: "https://www.linkedin.com/in/namuun-uiux/", // Added
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-    referralStatus: "APPROVED",
-    referralStatusUpdatedAt: "2026-01-05",
-    bonusAmount: 400000,
-    bonusApprovedAt: "2026-01-06",
-    createdAt: "2025-12-10",
-    updatedAt: "2026-01-06",
-  },
-  {
-    _id: "ref_302",
-    postedJobId: "job_res_1",
-    referringEmployeeId: "emp1",
-    relationWithCandidate: "OTHER",
-    referralReason: "Junior designer looking for a career change.",
-    candidateFirstName: "Тулга",
-    candidateLastName: "Даваа",
-    candidateTelNumber: "8888-6060",
-    candidateEmail: "tulga.d@gmail.com",
-    candidateCurrentStatus: "STUDENT",
-    candidateResume: "/resumes/tulga-d-student.pdf",
-    candidateLinkedinUrl: "https://www.linkedin.com/in/tulga-d-designer/", // Added
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-    referralStatus: "REJECTED",
-    referralStatusUpdatedAt: "2025-12-20",
-    createdAt: "2025-12-12",
-    updatedAt: "2025-12-20",
-  },
-
-  // --- REFERRALS FOR RESOLVED JOB 2 (Data Analyst) ---
-  {
-    _id: "ref_401",
-    postedJobId: "job_res_2",
-    referringEmployeeId: "emp4",
-    relationWithCandidate: "ALUMNI",
-    referralReason: "Expert in SQL and Python. Very detail oriented.",
-    candidateFirstName: "Хангай",
-    candidateLastName: "Энх",
-    candidateTelNumber: "8888-7070",
-    candidateEmail: "khangai.e@data.mn",
-    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateResume: "/cv/khangai_data.pdf",
-    candidateLinkedinUrl: "https://www.linkedin.com/in/khangai-enkh-data/", // Added
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-    referralStatus: "APPROVED",
-    referralStatusUpdatedAt: "2025-12-25",
-    bonusAmount: 350000,
-    bonusApprovedAt: "2025-12-26",
-    createdAt: "2025-11-25",
-    updatedAt: "2025-12-26",
-  },
-  {
-    _id: "ref_402",
-    postedJobId: "job_res_2",
-    referringEmployeeId: "emp3",
-    relationWithCandidate: "FRIEND",
-    referralReason: "Knows basic Excel, wants to learn more data analysis.",
-    candidateFirstName: "Сарнай",
-    candidateLastName: "Мөнх",
-    candidateTelNumber: "8888-8080",
-    candidateEmail: "sarnai.m@gmail.com",
-    candidateCurrentStatus: "OTHER",
-    candidateResume: "/resumes/sarnai-m-data.pdf",
-    candidateLinkedinUrl: "https://www.linkedin.com/in/sarnai-analyst/", // Added
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-    referralStatus: "REJECTED",
-    referralStatusUpdatedAt: "2025-12-10",
-    createdAt: "2025-11-26",
-    updatedAt: "2025-12-10",
-  },
-  {
-    _id: "ref_403",
-    postedJobId: "job_res_2",
-    referringEmployeeId: "emp2",
-    relationWithCandidate: "FORMER_COLLEAGUE",
-    referralReason:
-      "Experienced analyst but requires a higher salary than offered.",
-    candidateFirstName: "Билгүүн",
-    candidateLastName: "Зориг",
-    candidateTelNumber: "8888-9090",
-    candidateEmail: "bilguun.z@gmail.com",
-    candidateCurrentStatus: "CURRENTLY_EMPLOYED",
-    candidateResume: "/resumes/bilguun-z-senior.pdf",
-    candidateLinkedinUrl: "https://www.linkedin.com/in/bilguun-zorig-data/", // Added
-    hasCandidateConsent: true,
-    isNotCurrentEmployee: true,
-    referralStatus: "REJECTED",
-    referralStatusUpdatedAt: "2025-12-15",
-    createdAt: "2025-11-28",
-    updatedAt: "2025-12-15",
   },
 ];
